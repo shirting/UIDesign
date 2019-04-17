@@ -1,0 +1,14 @@
+#Login{
+    background-image:url("../image/Login.jpg");
+}
+.parallax{
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:cover;
+    color: #000000;
+    overflow:hidden;
+}
+.parallax-overlay{
+    background-color:rgba(0,0,0,0.5);
+}
