@@ -9,11 +9,18 @@
 <html>
 <head>
     <link href="Style/amazeui.css" rel="stylesheet">
-    <link href="Style/dlstyle.css" rel="stylesheet" type="text/css">
     <link href="Style/personal.css" rel="stylesheet" type="text/css">
-    <link href="Style/addstyle.css" rel="stylesheet" type="text/css">
+    <!--<link href="Style/dlstyle.css" rel="stylesheet" type="text/css">
+
+    <link href="Style/addstyle.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
+
+    <link href="//shadow.elemecdn.com/faas/desktop/main.30bad1.css" rel="stylesheet">
+
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="JS/Restaurant.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
     <title>餐厅信息</title>
@@ -26,42 +33,7 @@
 <b class="line"></b>
 
 <div class="center">
-    <div class="col-main">
-        <div class="main-wrap">
-
-            <div class="user-address">
-                <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">基本信息</strong> / <small>Address&nbsp;list</small>&nbsp<button class="am-btn am-btn-danger" onclick="EditRestaurantInfo()" id="editinfo">编辑</button></div>
-                </div>
-                <hr>
-                <div>
-                    <div id="main"></div>
-                    <div class="clear"></div>
-
-                </div>
-
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $(".new-option-r").click(function() {
-                            $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
-                        });
-
-                        var $ww = $(window).width();
-                        if($ww>640) {
-                            $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
-                        }
-
-                    })
-                </script>
-
-                <div class="clear"></div>
-
-            </div>
-            <!--底部-->
-        </div>
-    </div>
-
-    <aside class="menu">
+    <aside class="menu col-md-2">
         <ul>
             <li class="person">
                 <a onclick="RestaurantInfo()">餐厅信息</a>
@@ -81,6 +53,61 @@
         </ul>
 
     </aside>
+
+    <div class="col-main-10">
+        <div class="main-wrap">
+
+            <div class="user-address">
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">基本信息</strong> /
+                        <small>Address&nbsp;list</small>
+                        &nbsp
+                        <button class="am-btn am-btn-danger" onclick="EditRestaurantInfo()" id="editinfo">编辑</button>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <div style='padding-left: 2%;padding-right: 2%;' ng-show="!loading" class="shopmenu-main grid"
+                         ng-class="{grid: displayType === 'grid', list: displayType === 'list'}" style="margin-top: 0px;">
+                        <!-- ngIf: filterData === 'default' && !searchEnv -->
+                        <div class="col-2 shopmenu-food-main">
+                            <div ng-if="filterData === 'default' &amp;&amp; !searchEnv" class="ng-scope">
+                                <!-- ngRepeat: category in categorys -->
+                                <div id='main' class="shopmenu-list clearfix ng-scope"
+                                     ng-repeat="category in categorys">
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="clean"></div>
+
+
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".new-option-r").click(function () {
+                            $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+                        });
+
+                        var $ww = $(window).width();
+                        if ($ww > 640) {
+                            $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+                        }
+
+                    })
+                </script>
+
+                <div class="clear"></div>
+
+            </div>
+            <!--底部-->
+        </div>
+    </div>
+
+
 </div>
 </body>
 </html>

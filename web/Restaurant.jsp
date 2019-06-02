@@ -33,7 +33,28 @@
 <b class="line"></b>
 
 <div class="center">
-    <div class="col-main">
+    <aside class="menu col-md-2">
+        <ul>
+            <li class="person">
+                <a onclick="RestaurantInfo()">餐厅信息</a>
+            </li>
+            <li class="person">
+                <a onclick="Dishes()">菜单</a>
+            </li>
+            <li class="person">
+                <a onclick="Discount()">优惠</a>
+            </li>
+            <li class="person">
+                <a onclick="GetOrders()">历史订单</a>
+            </li>
+            <li class="person">
+                <a onclick="RestaurantLogout()">退出</a>
+            </li>
+        </ul>
+
+    </aside>
+
+    <div class="col-main-10">
         <div class="main-wrap">
 
             <div class="user-address">
@@ -86,26 +107,7 @@
         </div>
     </div>
 
-    <aside class="menu">
-        <ul>
-            <li class="person">
-                <a onclick="RestaurantInfo()">餐厅信息</a>
-            </li>
-            <li class="person">
-                <a onclick="Dishes()">菜单</a>
-            </li>
-            <li class="person">
-                <a onclick="Discount()">优惠</a>
-            </li>
-            <li class="person">
-                <a onclick="GetOrders()">历史订单</a>
-            </li>
-            <li class="person">
-                <a onclick="RestaurantLogout()">退出</a>
-            </li>
-        </ul>
 
-    </aside>
 </div>
 </body>
 </html>
