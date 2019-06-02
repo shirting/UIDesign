@@ -14,8 +14,10 @@
 
     <link href="Style/addstyle.css" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="Style/vendor.2e9f33.css" rel="stylesheet">
-    <link href="Style/main.30bad1.css" rel="stylesheet">
+    <link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
+
+    <link href="//shadow.elemecdn.com/faas/desktop/main.30bad1.css" rel="stylesheet">
+
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="JS/Restaurant.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
