@@ -12,8 +12,10 @@
 <link href="Style/personal.css" rel="stylesheet" type="text/css">
 <link href="Style/orstyle.css" rel="stylesheet" type="text/css">
 
-<link href="Style/vendor.2e9f33.css" rel="stylesheet">
-<link href="Style/main.30bad1.css" rel="stylesheet">
+<link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
+
+<link href="//shadow.elemecdn.com/faas/desktop/main.30bad1.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
