@@ -46,7 +46,7 @@ function MemberLogin(){
                             window.location.href=url;
                         }else{
                             //跳转至订餐界面
-                            var url=encodeURI("OrderDish.jsp?~"+jo.memberId+"~"+jo.memberName+"~"+password);
+                            var url=encodeURI("Main.jsp?~"+jo.memberId+"~"+jo.memberName+"~"+password);
                             window.location.href=url;
                         }
                     }
@@ -122,7 +122,7 @@ function Member(){
         "          <!--\n" +
         "             <label for=\"doc-vld-name-2\"><i class=\"am-icon-user\"></i></label>\n" +
         "             -->\n" +
-        "          <input type=\"text\" id=\"name\" minlength=\"3\" placeholder=\"YUMMY！\" required/>\n" +
+        "          <input type=\"text\" id=\"name\" minlength=\"3\" placeholder=\"输入用户名\" required/>\n" +
         "        </div>\n" +
         "        <div class=\"am-form-group\">\n" +
         "          <!--\n" +
@@ -145,13 +145,12 @@ function Member(){
 
 function Restaurant(){
     var Restaurant =document.getElementById("info");
-    Restaurant.innerHTML =
-        "      <form action=\"\" class=\"am-form\" data-am-validator>\n" +
+    Restaurant.innerHTML ="      <form action=\"\" class=\"am-form\" data-am-validator>\n" +
         "        <div class=\"am-form-group\">\n" +
         "          <!--\n" +
         "             <label for=\"doc-vld-name-2\"><i class=\"am-icon-user\"></i></label>\n" +
         "             -->\n" +
-        "          <input type=\"text\" id=\"name\" minlength=\"3\" placeholder=\"YUMMY！\" required/>\n" +
+        "          <input type=\"text\" id=\"name\" minlength=\"3\" placeholder=\"输入餐厅名\" required/>\n" +
         "        </div>\n" +
         "        <div class=\"am-form-group\">\n" +
         "          <!--\n" +
@@ -159,7 +158,7 @@ function Restaurant(){
         "                      <i class=\"am-icon-key\"></i>\n" +
         "                     </label>\n" +
         "                     -->\n" +
-        "          <input type=\"chaptcha\" id=\"chaptcha\" placeholder=\"输入编码\" required/>\n" +
+        "          <input type=\"text\" id=\"chaptcha\" placeholder=\"输入编码\" required/>\n" +
         "        </div>\n" +
         "        <div>&nbsp&nbsp\n" +
         "          <input type=\"radio\" name=\"role\" value=\"Member\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
