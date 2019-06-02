@@ -96,47 +96,11 @@
                     <div class="place-rstbox clearfix">
                         <div class="clearfix" id="sellerbox"
                              data="filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])"
-                             style="height: 5600px;">
+                            >
                         </div>
 
 
-                        <div class="am-tabs-bd" hidden="true">
-                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-                                <div class="order-top">
-                                    <div class="th th-amount">
-                                        <td class="td-inner">店铺名</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner">||</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner">店铺地址</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner">||</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner">联系方式</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner">||</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner">店铺优惠</td>
-                                    </div>
-                                    <div class="th th-amount">
-                                        <td class="td-inner"></td>
-                                    </div>
-                                </div>
 
-                                <div class="order-main">
-                                    <div class="order-list" id="dish">
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
 
                     </div>
                 </div>
