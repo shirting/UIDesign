@@ -59,7 +59,29 @@
 <b class="line"></b>
 
 <div class="center">
-    <div class="col-main">
+    <aside class="menu col-md-2" >
+        <ul>
+            <li class="person">
+                <a onclick="member()">个人中心</a>
+            </li>
+            <li class="person">
+                <a onclick="MemberNowOrder()">当前订单</a>
+            </li>
+            <li class="person">
+                <a onclick="MemberHistoryOrders()">历史订单</a>
+            </li>
+            <li class="person">
+                <a onclick="DeleteMember()">注销账号</a>
+            </li>
+            <li class="person">
+                <a onclick="Logout()">退出</a>
+            </li>
+        </ul>
+
+    </aside>
+
+
+    <div class="col-main-10">
         <div class="main-wrap">
 
             <div class="user-order">
@@ -185,26 +207,7 @@
     </div>
 
 
-    <aside class="menu" hidden="true">
-        <ul>
-            <li class="person">
-                <a onclick="member()">个人中心</a>
-            </li>
-            <li class="person">
-                <a onclick="MemberNowOrder()">当前订单</a>
-            </li>
-            <li class="person">
-                <a onclick="MemberHistoryOrders()">历史订单</a>
-            </li>
-            <li class="person">
-                <a onclick="DeleteMember()">注销账号</a>
-            </li>
-            <li class="person">
-                <a onclick="Logout()">退出</a>
-            </li>
-        </ul>
 
-    </aside>
 </div>
 </body>
 <script>

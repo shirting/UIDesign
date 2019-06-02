@@ -7,7 +7,7 @@ function GetRestaurant(type) {
     var dish = document.getElementById("dish");
     var sellerbox = document.getElementById("sellerbox");
     sellerbox.innerHTML = "";
-    dish.innerHTML = "";
+    //dish.innerHTML = "";
     //alert(type);
     $.ajax({
         type: "POST",
