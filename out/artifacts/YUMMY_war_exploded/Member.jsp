@@ -10,10 +10,10 @@
 <!--
 <script src="JS/amazeui.js"></script>
 -->
-<link href="Style/amazeui.css" rel="stylesheet">
-<link href="Style/dlstyle.css" rel="stylesheet" type="text/css">
+<link href="Style/admin.css" rel="stylesheet" type="text/css">
+<link href="Style/amazeui.css" rel="stylesheet" type="text/css">
 <link href="Style/personal.css" rel="stylesheet" type="text/css">
-<link href="Style/addstyle.css" rel="stylesheet" type="text/css">
+<link href="Style/infstyle.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="JS/Member.js"></script>
 <head>
@@ -90,119 +90,121 @@
     </article>
 </header>
 <b class="line"></b>
-
 <div class="center">
     <div class="col-main">
         <div class="main-wrap">
-
-            <div class="user-address">
+            <div class="user-info">
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">基本信息</strong> / <small>Address&nbsp;list</small>&nbsp<button class="am-btn am-btn-danger" onclick="Edit()" id="save">编辑</button></div>
+                    <div class="am-fl am-cf">
+                        <strong class="am-text-danger am-text-lg">基本信息</strong>
+                        &nbsp
+                        <button class="am-btn am-btn-danger" onclick="Edit()" id="save">编辑</button></div>
                 </div>
-                <hr>
-                <div>
-                    <div class="am-form-group">
-                        <label for="id" class="am-form-label">ID：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="id" style="border:none"/>
+                <hr/>
+                <div class="info-main">
+                    <div class="am-form am-form-horizontal">
+                        <div class="am-form-group">
+                            <label for="id" class="am-form-label">ID：</label>
+                            <div class="am-form-content">
+                                <input type="text" readonly="readonly" id="id"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="name" class="am-form-label">昵称：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="name" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="name" class="am-form-label">昵称：</label>
+                            <div class="am-form-content">
+                                <input type="text" id="name"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="password" class="am-form-label">密码：</label>
-                        <div class="am-form-content">
-                            <input type="password" readonly="readonly" id="password" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="password" class="am-form-label">密码：</label>
+                            <div class="am-form-content">
+                                <input type="password" id="password"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="phone" class="am-form-label">电话：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="phone" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="phone" class="am-form-label">电话：</label>
+                            <div class="am-form-content">
+                                <input type="text" id="phone"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="email" class="am-form-label">邮箱：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="email" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="email" class="am-form-label">邮箱：</label>
+                            <div class="am-form-content">
+                                <input type="text" id="email"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="account" class="am-form-label">支付账号：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="account" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="account" class="am-form-label">支付账号：</label>
+                            <div class="am-form-content">
+                                <input type="text" readonly="readonly" id="account"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="balance" class="am-form-label">支付余额：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="balance" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="balance" class="am-form-label">支付余额：</label>
+                            <div class="am-form-content">
+                                <input type="text" readonly="readonly" id="balance"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="credit" class="am-form-label">会员积分：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="credit" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="credit" class="am-form-label">会员积分：</label>
+                            <div class="am-form-content">
+                                <input type="text" readonly="readonly" id="credit"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="am-form-group">
-                        <label for="level" class="am-form-label">会员级别：</label>
-                        <div class="am-form-content">
-                            <input type="text" readonly="readonly" id="level" style="border:none"/>
+                        <div class="am-form-group">
+                            <label for="level" class="am-form-label">会员级别：</label>
+                            <div class="am-form-content">
+                                <input type="text" readonly="readonly" id="level"/>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="am-form-group">
-                        <label for="Naddress" class="am-form-label">已有地址：</label>
-                        <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-                            <div class="am-form-group">
-                                <div class="am-form-content">
-                                 <div id="add">
+                        <div class="am-form-group">
+                            <label for="Naddress" class="am-form-label">已有地址：</label>
+                            <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+                                <div class="am-form-group">
+                                    <div class="am-form-content">
+                                        <div id="add">
+                                        </div>
+                                        <div id="Naddress">
+                                        </div>
+                                        <label id="addr-show">
+                                        </label>
                                     </div>
-                                 <div id="Naddress">
+                                </div>
+                            </ul>
+                            <form class="am-form am-form-horizontal" id="newaddress" style="display:none">
+                                <div class="am-form-group">
+                                    <div class="am-form-content address" >
+                                        <!--省份选择-->
+                                        <select data-am-selected id="prov" onchange="showCity(this)">
+                                            <option>=请选择省份=</option>
+
+                                        </select>
+
+                                        <!--城市选择-->
+                                        <select data-am-selected id="city" onchange="showCountry(this)">
+                                            <option>=请选择城市=</option>
+                                        </select>
+
+                                        <!--县区选择-->
+                                        <select data-am-selected id="country" onchange="selecCountry(this)">
+                                            <option>=请选择县区=</option>
+                                        </select>
                                     </div>
-                                    <label id="addr-show">
-                                    </label>
                                 </div>
-                             </div>
-                        </ul>
-                        <form class="am-form am-form-horizontal" id="newaddress" style="display:none">
-                            <div class="am-form-group">
-                                <div class="am-form-content address" >
-                                    <!--省份选择-->
-                                    <select data-am-selected id="prov" onchange="showCity(this)">
-                                        <option>=请选择省份=</option>
-
-                                    </select>
-
-                                    <!--城市选择-->
-                                    <select data-am-selected id="city" onchange="showCountry(this)">
-                                        <option>=请选择城市=</option>
-                                    </select>
-
-                                    <!--县区选择-->
-                                    <select data-am-selected id="country" onchange="selecCountry(this)">
-                                        <option>=请选择县区=</option>
-                                    </select>
+                                <div class="am-form-group">
+                                    <div class="am-form-content">
+                                        <textarea class="" rows="3" id="ANewAddress" placeholder="输入详细地址"></textarea>
+                                        <small>100字以内写出你的详细地址...</small>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="am-form-group">
-                                <div class="am-form-content">
-                                    <textarea class="" rows="3" id="ANewAddress" placeholder="输入详细地址"></textarea>
-                                    <small>100字以内写出你的详细地址...</small>
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <a class="am-btn am-btn-danger" onClick="showAddr()">保存</a>
+                                        <a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="am-form-group">
-                                <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <a class="am-btn am-btn-danger" onClick="showAddr()">保存</a>
-                                    <a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 <div class="clear"></div>
                 <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
