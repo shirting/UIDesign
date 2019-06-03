@@ -1,4 +1,4 @@
-var edit = 1;
+var edit = 0;
 var name, Name;
 var chaptcha;
 var phone;
@@ -20,38 +20,43 @@ function RestaurantInfo() {
     var thisURL = decodeURI(window.location.href);
     name = thisURL.split('~')[1];
     chaptcha = thisURL.split('~')[2];
-    var main = document.getElementById("main");
+    var main = document.getElementById("main1");
+    var main1 = document.getElementById("main");
+    main1.innerHTML= "";
     main.innerHTML = "";
     main.innerHTML += " <div class=\"am-form-group\">\n" +
-        "                        <label for=\"chaptcha\" class=\"am-form-label\">编码：</label>\n" +
+        "                        <label for=\"chaptcha\" class=\"am-form-label\">编码</label>\n" +
         "                        <div class=\"am-form-content\">\n" +
-        "                            <input type=\"text\" readonly=\"readonly\" id=\"chaptcha\" style=\"border:none\"/>\n" +
+        "                            <input type=\"text\" readonly=\"readonly\" id=\"chaptcha\"/>\n" +
         "                        </div>\n" +
         "                    </div>\n" +
         "                    <div class=\"am-form-group\">\n" +
-        "                        <label for=\"resname\" class=\"am-form-label\">餐厅名：</label>\n" +
+        "                        <label for=\"resname\" class=\"am-form-label\">餐厅名</label>\n" +
         "                        <div class=\"am-form-content\">\n" +
-        "                            <input type=\"text\" readonly=\"readonly\" id=\"resname\" style=\"border:none\"/>\n" +
+        "                            <input type=\"text\" id=\"resname\"/>\n" +
         "                        </div>\n" +
         "                    </div>\n" +
         "                    <div class=\"am-form-group\">\n" +
-        "                        <label for=\"phone\" class=\"am-form-label\">联系方式：</label>\n" +
+        "                        <label for=\"phone\" class=\"am-form-label\">联系方式</label>\n" +
         "                        <div class=\"am-form-content\">\n" +
-        "                            <input type=\"text\" readonly=\"readonly\" id=\"phone\" style=\"border:none\"/>\n" +
+        "                            <input type=\"text\" id=\"phone\" />\n" +
         "                        </div>\n" +
         "                    </div>\n" +
         "                    <div class=\"am-form-group\">\n" +
-        "                        <label for=\"address\" class=\"am-form-label\">餐厅地址：</label>\n" +
+        "                        <label for=\"address\" class=\"am-form-label\">餐厅地址</label>\n" +
         "                        <div class=\"am-form-content\">\n" +
-        "                            <input type=\"text\" readonly=\"readonly\" id=\"address\" style=\"border:none\"/>\n" +
+        "                            <input type=\"text\" id=\"address\" style='width:40%'/>\n" +
         "                        </div>\n" +
         "                    </div>\n" +
         "                    <div class=\"am-form-group\">\n" +
-        "                        <label for=\"type\" class=\"am-form-label\">餐厅类型：</label>\n" +
+        "                        <label for=\"type\" class=\"am-form-label\">餐厅类型</label>\n" +
         "                        <div class=\"am-form-content\">\n" +
-        "                            <input type=\"text\" readonly=\"readonly\" id=\"type\" style=\"border:none\"/>\n" +
+        "                            <input type=\"text\" readonly=\"readonly\" id=\"type\"/>\n" +
         "                        </div>\n" +
-        "                    </div>";
+        "                    </div>"+
+        "<div class=\"am-form\">\n" +
+        "        <button class=\"am-btn am-btn-danger\"  onclick=\"EditRestaurantInfo()\" type=\"submit\" id=\"editinfo\" style='background-position: center;width:15%;margin-left: 20% ' >保存</button>\n" +
+        "      </div>";
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -89,42 +94,27 @@ function EditRestaurantInfo() {
     type = document.getElementById("type");
     editinfo = document.getElementById("editinfo");
     //餐厅名、联系方式、餐厅类型、餐厅地址
-    if ((edit % 2) == 1) {
-        //修改
-        alert(edit % 2);
-        Name.removeAttribute("readOnly");
-        phone.removeAttribute("readOnly");
-        address.removeAttribute("readOnly");
-        type.removeAttribute("readOnly");
-        Name.setAttribute("style", "border:solid");
-        phone.setAttribute("style", "border:solid");
-        address.setAttribute("style", "border:solid");
-        type.setAttribute("style", "border:solid");
-        editinfo.innerText = "提交";
-        edit++;
-    } else {
-        //提交新的信息给经理审核
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            data: {
-                "name": Name.value,
-                "chaptcha": chaptcha.value,
-                "phone": phone.value,
-                "address": address.value,
-                "type": type.value
-            },
-            url: "EditRestaurantInfoServlet",
-            success: function (result) {
-                alert(result);
-                var thisURL = decodeURI(window.location.href);
-                var name = thisURL.split('~')[1];
-                var chaptcha = thisURL.split('~')[2];
-                var url = encodeURI("Restaurant.jsp?~" + name + "~" + chaptcha);
-                window.location.href = url;
-            }
-        })
-    }
+    //提交新的信息给经理审核
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        data: {
+            "name": Name.value,
+            "chaptcha": chaptcha.value,
+            "phone": phone.value,
+            "address": address.value,
+            "type": type.value
+        },
+        url: "EditRestaurantInfoServlet",
+        success: function (result) {
+            alert(result);
+            var thisURL = decodeURI(window.location.href);
+            var name = thisURL.split('~')[1];
+            var chaptcha = thisURL.split('~')[2];
+            var url = encodeURI("Restaurant.jsp?~" + name + "~" + chaptcha);
+            window.location.href = url;
+        }
+    })
 }
 
 function Dishes() {
@@ -135,6 +125,8 @@ function Dishes() {
     var thisURL = decodeURI(window.location.href);
     name = thisURL.split('~')[1];
     chaptcha = thisURL.split('~')[2];
+    var main1 = document.getElementById("main1");
+    main1.innerHTML= "";
     //得到已有的优惠
     $.ajax({
         type: "POST",
@@ -211,6 +203,8 @@ function Discount() {
     //新增优惠
     var thisURL = decodeURI(window.location.href);
     chaptcha = thisURL.split('~')[2];
+    var main1 = document.getElementById("main1");
+    main1.innerHTML= "";
     //得到已有的优惠
     $.ajax({
         type: "POST",

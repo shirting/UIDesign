@@ -8,8 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="Style/amazeui.css" rel="stylesheet">
+    <link href="Style/admin.css" rel="stylesheet" type="text/css">
+    <link href="Style/amazeui.css" rel="stylesheet" type="text/css">
     <link href="Style/personal.css" rel="stylesheet" type="text/css">
+    <link href="Style/infstyle.css" rel="stylesheet" type="text/css">
     <!--<link href="Style/dlstyle.css" rel="stylesheet" type="text/css">
 
     <link href="Style/addstyle.css" rel="stylesheet" type="text/css">-->
@@ -33,42 +35,43 @@
 <b class="line"></b>
 
 <div class="center">
-    <aside class="menu col-md-2">
-        <ul>
-            <li class="person">
-                <a onclick="RestaurantInfo()">餐厅信息</a>
-            </li>
-            <li class="person">
-                <a onclick="Dishes()">菜单</a>
-            </li>
-            <li class="person">
-                <a onclick="Discount()">优惠</a>
-            </li>
-            <li class="person">
-                <a onclick="GetOrders()">历史订单</a>
-            </li>
-            <li class="person">
-                <a onclick="RestaurantLogout()">退出</a>
-            </li>
-        </ul>
 
-    </aside>
+    <div class="col-main">
+        <aside class="menu col-md-2">
+            <ul>
+                <li class="person">
+                    <a onclick="RestaurantInfo()">餐厅信息</a>
+                </li>
+                <li class="person">
+                    <a onclick="Dishes()">菜单</a>
+                </li>
+                <li class="person">
+                    <a onclick="Discount()">优惠</a>
+                </li>
+                <li class="person">
+                    <a onclick="GetOrders()">历史订单</a>
+                </li>
+                <li class="person">
+                    <a onclick="RestaurantLogout()">退出</a>
+                </li>
+            </ul>
 
-    <div class="col-main-10">
+        </aside>
         <div class="main-wrap">
-
-            <div class="user-address">
+            <div class="user-info">
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">基本信息</strong> /
-                        <small>Address&nbsp;list</small>
+                    <div class="am-fl am-cf">
+                        <strong class="am-text-danger am-text-lg">基本信息</strong>
                         &nbsp
-                        <button class="am-btn am-btn-danger" onclick="EditRestaurantInfo()" id="editinfo">编辑</button>
-                    </div>
+                        </div>
                 </div>
-                <hr>
-                <div>
+                <hr/>
+                <div id='main1' class="info-main">
+                    <button class="am-btn am-btn-danger" onclick="EditRestaurantInfo()" id="editinfo">保存</button>
+                </div>
                     <div style='padding-left: 2%;padding-right: 2%;' ng-show="!loading" class="shopmenu-main grid"
-                         ng-class="{grid: displayType === 'grid', list: displayType === 'list'}" style="margin-top: 0px;">
+                         ng-class="{grid: displayType === 'grid', list: displayType === 'list'}"
+                         style="margin-top: 0px;">
                         <!-- ngIf: filterData === 'default' && !searchEnv -->
                         <div class="col-2 shopmenu-food-main">
                             <div ng-if="filterData === 'default' &amp;&amp; !searchEnv" class="ng-scope">
@@ -78,14 +81,10 @@
 
                                 </div>
 
-
                             </div>
                         </div>
                     </div>
                     <div id="clean"></div>
-
-
-                </div>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $(".new-option-r").click(function () {
@@ -105,8 +104,7 @@
             </div>
             <!--底部-->
         </div>
-    </div>
-
+        </div>
 
 </div>
 </body>
