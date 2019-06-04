@@ -162,8 +162,6 @@
                                 <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
                                         <a class="am-btn am-btn-danger" onClick="showAddr()">保存</a>
-                                        <a href="javascript: void(0)" class="am-close am-btn am-btn-danger"
-                                           data-am-modal-close>取消</a>
                                     </div>
                                 </div>
                             </form>
