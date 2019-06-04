@@ -13,7 +13,7 @@
 <link href="Style/admin.css" rel="stylesheet" type="text/css">
 <link href="Style/amazeui.css" rel="stylesheet" type="text/css">
 <link href="Style/personal.css" rel="stylesheet" type="text/css">
-<link href="Style/infstyle.css" rel="stylesheet" type="text/css">
+<link href="Style/addstyle.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="JS/MemberAddress.js"></script>
 <head>
@@ -80,7 +80,8 @@
                         <div class="menu-hd"><a onclick="Main()" target="_top" class="h">订餐大厅</a></div>
                     </div>
                     <div class="topMessage my-shangcheng">
-                        <div class="menu-hd MyShangcheng"><a href="#" target="_top" onclick="member()"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+                        <div class="menu-hd MyShangcheng"><a href="#" target="_top" onclick="member()"><i
+                                class="am-icon-user am-icon-fw"></i>个人中心</a></div>
                     </div>
                 </ul>
             </div>
@@ -91,36 +92,48 @@
 </header>
 <b class="line"></b>
 <div class="center">
+
     <div class="col-main">
         <div class="main-wrap">
-            <div class="user-info">
+
+            <div class="user-address">
+                <!--标题 -->
                 <div class="am-cf am-padding">
                     <div class="am-fl am-cf">
-                        <strong class="am-text-danger am-text-lg">基本信息</strong>
-                        &nbsp
-                        <button class="am-btn am-btn-danger" onclick="Edit()" id="save">编辑</button></div>
+                        <strong class="am-text-danger am-text-lg">地址管理</strong> /
+                        <small>Address&nbsp;list</small>
+                    </div>
                 </div>
                 <hr/>
-                <div class="info-main">
-                    <div class="am-form am-form-horizontal">
-                        <div class="am-form-group">
-                            <label for="Naddress" class="am-form-label">已有地址：</label>
-                            <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+                <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+                    <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
+                        <div id="add">
+                        </div>
+                        <div id="Naddress">
+                        </div>
+                        <label id="addr-show">
+                        </label>
+                    </ul>
+                </ul>
+                <div class="clear"></div>
+                <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
+                <!--例子-->
+                <div class="am-modal am-modal-no-btn" id="doc-modal-1">
+
+                    <div class="add-dress">
+
+                        <!--标题 -->
+                        <div class="am-cf am-padding">
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> /
+                                <small>Add&nbsp;address</small>
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
+                            <form class="am-form am-form-horizontal" id="newaddress">
                                 <div class="am-form-group">
-                                    <div class="am-form-content">
-                                        <div id="add">
-                                        </div>
-                                        <div id="Naddress">
-                                        </div>
-                                        <label id="addr-show">
-                                        </label>
-                                    </div>
-                                </div>
-                            </ul>
-                            <form class="am-form am-form-horizontal" id="newaddress" style="display:block">
-                                <div class="am-form-group">
-                                    <div class="am-form-content address" >
-                                        <!--省份选择-->
+                                    <div class="am-form-content address">
                                         <select data-am-selected id="prov" onchange="showCity(this)">
                                             <option>=请选择省份=</option>
 
@@ -137,58 +150,47 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="am-form-group">
+                                    <label for="ANewAddress" class="am-form-label">详细地址</label>
                                     <div class="am-form-content">
                                         <textarea class="" rows="3" id="ANewAddress" placeholder="输入详细地址"></textarea>
                                         <small>100字以内写出你的详细地址...</small>
                                     </div>
                                 </div>
+
                                 <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
                                         <a class="am-btn am-btn-danger" onClick="showAddr()">保存</a>
-                                        <a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+                                        <a href="javascript: void(0)" class="am-close am-btn am-btn-danger"
+                                           data-am-modal-close>取消</a>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
-                    <!--例子-->
-                    <div class="am-modal am-modal-no-btn" id="doc-modal-1">
-                        <div class="add-dress">
-
-                            <!--标题 -->
-                            <div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
-                                <form class="am-form am-form-horizontal">
-
-                                </form>
-                            </div>
-
                         </div>
 
                     </div>
 
                 </div>
 
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $(".new-option-r").click(function() {
-                            $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
-                        });
-
-                        var $ww = $(window).width();
-                        if($ww>640) {
-                            $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
-                        }
-
-                    })
-                </script>
-
-                <div class="clear"></div>
-
             </div>
-            <!--底部-->
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(".new-option-r").click(function () {
+                        $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+                    });
+
+                    var $ww = $(window).width();
+                    if ($ww > 640) {
+                        $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+                    }
+
+                })
+            </script>
+
+            <div class="clear"></div>
+
         </div>
     </div>
 

@@ -79,11 +79,7 @@ function selecCountry(obj) {
 
 /*点击确定按钮显示用户所选的地址*/
 
-function showAddr() {
-    var a=document.getElementById("Naddress");
-    address=document.getElementById("ANewAddress");
-    var value=provice[current.prov].name + '-' + provice[current.prov]["city"][current.city].name + '-' + provice[current.prov]["city"][current.city].districtAndCounty[current.country]+'-'+address.value;
-    a.innerHTML +="<div class=\"new-mu_l2a new-p-re\">\n" +
-    "<p class=\"new-mu_l2cw\"><input  type='text'  value='"+value+"' id='"+value+"' style='border:solid;width:250px'/></p></div>"
-    msgbox(0);
+function msgbox(n) {
+    document.getElementById('newaddress').style.display = n ? 'block'
+        : 'none'; /* 点击按钮打开/关闭 对话框 */
 }
