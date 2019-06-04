@@ -116,6 +116,9 @@
                 <a onclick="member()">个人中心</a>
             </li>
             <li class="person">
+                <a onclick="Memberaddress()">地址管理</a>
+            </li>
+            <li class="person">
                 <a onclick="MemberNowOrder()">当前订单</a>
             </li>
             <li class="person">

@@ -264,6 +264,15 @@ function MemberHistoryOrders(){
     var url=encodeURI("MemberHistoryOrder.jsp?~"+id+"~"+name+"~"+password);
     window.location.href=url;
 }
+
+function Memberaddress(){
+    var thisURL=decodeURI(window.location.href);
+    var id=thisURL.split('~')[1];
+    var name=thisURL.split('~')[2];
+    var password=thisURL.split('~')[3];
+    var url=encodeURI("MemberAddress.jsp?~"+id+"~"+name+"~"+password);
+    window.location.href=url;
+}
 function Logout(){
     var url=encodeURI("index.jsp");
     window.location.href=url;
