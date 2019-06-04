@@ -56,8 +56,6 @@ function memberaddress() {
                     "                                        <span class=\"street\">"+street+"</span></p>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"new-addr-btn\">\n" +
-                    "                                    <a href=\"#\" ><i class=\"am-icon-edit\"></i>编辑</a>\n" +
-                    "                                    <span class=\"new-addr-bar\">|</span>\n" +
                     "                                    <a onclick=\"Deleteaddress('"+address[i]+"')\"><i class=\"am-icon-trash\"></i>删除</a>\n" +
                     "                                </div>\n" +
                     "                            </li>"+
@@ -123,8 +121,6 @@ function showAddr() {
         "                                        <span class=\"street\">"+address.value+"</span></p>\n" +
         "                                </div>\n" +
         "                                <div class=\"new-addr-btn\">\n" +
-        "                                    <a href=\"#\" ><i class=\"am-icon-edit\"></i>编辑</a>\n" +
-        "                                    <span class=\"new-addr-bar\">|</span>\n" +
         "                                    <a onclick=\"Deleteaddress('"+value+"')\"><i class=\"am-icon-trash\"></i>删除</a>\n" +
         "                                </div>\n" +
         "                            </li>"+
