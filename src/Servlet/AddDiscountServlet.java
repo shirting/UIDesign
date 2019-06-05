@@ -42,10 +42,14 @@ public class AddDiscountServlet extends HttpServlet {
         String FullPrice=request.getParameter("FullPrice");
         String MinusPrice=request.getParameter("MinusPrice");
         String chaptcha=request.getParameter("chaptcha");
+        String StartTime=request.getParameter("StartTime");
+        String EndTime=request.getParameter("EndTime");
+        System.out.println(StartTime);
+        System.out.println(EndTime);
         ArrayList<String> Result=new ArrayList<>();
         DiscountService discountService=new DiscountServiceImpl();
         try {
-            Result=discountService.AddRestaurantDiscount(FullPrice,MinusPrice,chaptcha);
+            Result=discountService.AddRestaurantDiscount(FullPrice,MinusPrice,chaptcha,StartTime,EndTime);
             PrintWriter write = response.getWriter();
             Gson gson=new Gson();
             String str=gson.toJson(Result);
