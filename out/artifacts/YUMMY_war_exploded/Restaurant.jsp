@@ -12,6 +12,7 @@
     <link href="Style/amazeui.css" rel="stylesheet" type="text/css">
     <link href="Style/personal.css" rel="stylesheet" type="text/css">
     <link href="Style/infstyle.css" rel="stylesheet" type="text/css">
+    <link href="Style/addstyle.css" rel="stylesheet" type="text/css">
     <!--<link href="Style/dlstyle.css" rel="stylesheet" type="text/css">
 
     <link href="Style/addstyle.css" rel="stylesheet" type="text/css">-->
@@ -58,7 +59,7 @@
 
         </aside>
         <div class="main-wrap">
-            <div class="user-info">
+            <div class="user-address">
                 <div class="am-cf am-padding">
                     <div class="am-fl am-cf">
                         <strong class="am-text-danger am-text-lg">基本信息</strong>

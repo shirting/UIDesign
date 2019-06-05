@@ -159,7 +159,60 @@ function Dishes() {
                 "<div id='discount'>\n" +
                 "</div>\n" +
                 "</div>\n" +
-                "<button  class=\"btn btn-danger btn-sm\" onclick='DeleteDish(" + number1 + ")'>删除</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"btn btn-success btn-sm\" onclick=\"AddDish()\">添加</button>";
+                "<button  class=\"btn btn-danger btn-sm\" onclick='DeleteDish(" + number1 + ")'>删除</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"btn btn-success btn-sm\" onclick=\"AddDish()\">添加</button>"+" <a class=\"new-abtn-type\" data-am-modal=\"{target: '#doc-modal-1', closeViaDimmer: 0}\">添加新地址</a>\n" +
+                "                <!--例子-->\n" +
+                "                <div class=\"am-modal am-modal-no-btn\" id=\"doc-modal-1\">\n" +
+                "\n" +
+                "                    <div class=\"add-dress\">\n" +
+                "\n" +
+                "                        <!--标题 -->\n" +
+                "                        <div class=\"am-cf am-padding\">\n" +
+                "                            <div class=\"am-fl am-cf\"><strong class=\"am-text-danger am-text-lg\">新增地址</strong> /\n" +
+                "                                <small>Add&nbsp;address</small>\n" +
+                "                            </div>\n" +
+                "                        </div>\n" +
+                "                        <hr/>\n" +
+                "\n" +
+                "                        <div class=\"am-u-md-12 am-u-lg-8\" style=\"margin-top: 20px;\">\n" +
+                "                            <form class=\"am-form am-form-horizontal\" id=\"newaddress\">\n" +
+                "                                <div class=\"am-form-group\">\n" +
+                "                                    <div class=\"am-form-content address\">\n" +
+                "                                        <select data-am-selected id=\"prov\" onchange=\"showCity(this)\">\n" +
+                "                                            <option>=请选择省份=</option>\n" +
+                "\n" +
+                "                                        </select>\n" +
+                "\n" +
+                "                                        <!--城市选择-->\n" +
+                "                                        <select data-am-selected id=\"city\" onchange=\"showCountry(this)\">\n" +
+                "                                            <option>=请选择城市=</option>\n" +
+                "                                        </select>\n" +
+                "\n" +
+                "                                        <!--县区选择-->\n" +
+                "                                        <select data-am-selected id=\"country\" onchange=\"selecCountry(this)\">\n" +
+                "                                            <option>=请选择县区=</option>\n" +
+                "                                        </select>\n" +
+                "                                    </div>\n" +
+                "                                </div>\n" +
+                "\n" +
+                "                                <div class=\"am-form-group\">\n" +
+                "                                    <label for=\"ANewAddress\" class=\"am-form-label\">详细地址</label>\n" +
+                "                                    <div class=\"am-form-content\">\n" +
+                "                                        <textarea class=\"\" rows=\"3\" id=\"ANewAddress\" placeholder=\"输入详细地址\"></textarea>\n" +
+                "                                        <small>100字以内写出你的详细地址...</small>\n" +
+                "                                    </div>\n" +
+                "                                </div>\n" +
+                "\n" +
+                "                                <div class=\"am-form-group\">\n" +
+                "                                    <div class=\"am-u-sm-9 am-u-sm-push-3\">\n" +
+                "                                        <a class=\"am-btn am-btn-danger\" onClick=\"showAddr()\">保存</a>\n" +
+                "                                    </div>\n" +
+                "                                </div>\n" +
+                "                            </form>\n" +
+                "                        </div>\n" +
+                "\n" +
+                "                    </div>\n" +
+                "\n" +
+                "                </div>";
             var success = document.getElementById("success");
             //var doing =document.getElementById("doing");
 
@@ -212,6 +265,7 @@ function Discount() {
         data: {"chaptcha": chaptcha},
         url: "GetRestaurantDiscountServlet",
         success: function (result) {
+            console.log(result);
             var main = document.getElementById("main");
             main.innerHTML = "<div id=\"success\">\n" +
                 "    已有优惠：\n" +
@@ -223,7 +277,10 @@ function Discount() {
                 "    <input id=\"FullPrice\" type=\"text\"/>\n" +
                 "    减：\n" +
                 "    <input id=\"MinusPrice\" type=\"text\"/>\n" +
-                "<button onclick='DeleteDiscount(" + number + ")'>删除</button>" +
+            "  <br><br>  开始时间：\n" +
+            "    <input id=\"startTime\" type=\"date\" value=\"2019-06-01\"/>\n" +
+            " <br><br>   截止时间：\n" +
+            "    <input id=\"endTime\" type=\"date\" value=\"2019-06-01\"/>\n" +
                 "</div>\n" +
                 "<div id='discount'>\n" +
                 "</div>\n" +
@@ -239,6 +296,11 @@ function Discount() {
                     result[i].Full +
                     "    减：\n" +
                     result[i].Minus +
+                    "<div>  \n" +
+                    " 开始时间：\n" +
+                    result[i].StartTime.split(" ")[0] +
+                    "    截止时间：\n" +
+                    result[i].EndTime.split(" ")[0  ] +
                     "</div>  \n" +
                     "<button onclick='deleteDiscount(" + result[i].Full + "," + chaptcha + "," + result[i].Minus + ")'>删除</button>";
             }
@@ -271,15 +333,17 @@ function AddDiscount() {
     chaptcha = thisURL.split('~')[2];
     //var FullPrice=new Array();
     //var MinusPrice=new Array();
-    var full, minus;
+    var full, minus,starttime,endtime;
     newdiscount = document.getElementById("newdiscount");
     //alert(newdiscount.childNodes[1].childElementCount);
     if (newdiscount.childNodes[1].childElementCount != 0) {
         console.log(newdiscount.childNodes[1].children[0].value);
         full = newdiscount.childNodes[1].children[0].value;
         minus = newdiscount.childNodes[1].children[1].value;
-        console.log(full);
-        console.log(minus);
+        starttime=newdiscount.childNodes[1].children[4].value;
+        endtime=newdiscount.childNodes[1].children[7].value;
+        console.log(starttime);
+        console.log(endtime);
         //alert(FullPrice);
         //alert(FullPrice);
         //FullPrice.push(full);
@@ -295,7 +359,9 @@ function AddDiscount() {
         data: {
             "FullPrice": full,
             "MinusPrice": minus,
-            "chaptcha": chaptcha
+            "chaptcha": chaptcha,
+            "StartTime":starttime,
+            "EndTime":endtime
         },
         success: function (result) {
             //alert(result);
@@ -387,7 +453,7 @@ function deleteDiscount(full, chaptcha, minus) {
             "chaptcha": chaptcha
         },
         success: function (result) {
-            alert(result);
+            //alert(result);
             if (!result) {
                 alert("删除成功");
                 var thisURL = decodeURI(window.location.href);

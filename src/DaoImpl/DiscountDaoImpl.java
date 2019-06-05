@@ -8,7 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DiscountDaoImpl implements DiscountDao {
     private static DaoHelper daoHelper = DaoHelperImpl.getBaseDaoInstance();
@@ -17,27 +21,63 @@ public class DiscountDaoImpl implements DiscountDao {
     public ArrayList<Discount> GetRestaurantDiscount(String Chaptcha) throws Exception {
         Connection con=null;
         PreparedStatement stmt=null;
+        PreparedStatement stmt1=null;
         ResultSet result=null;
+        ResultSet result1=null;
         ArrayList<Discount> discounts= new ArrayList<Discount>();
         ArrayList<Discount> Discounts= new ArrayList<Discount>();
         String Result;
         int FullPrice,MinusPrice;
+        int y,m,d;
+        String date;
+        Calendar cal= Calendar.getInstance();
+        y=cal.get(Calendar.YEAR);
+        m=cal.get(Calendar.MONTH)+1;
+        d=cal.get(Calendar.DATE);
+        date=""+y+"-"+m+"-"+d;
         try {
             con = daoHelper.getConnection();
             stmt=con.prepareStatement("Select * From Discount Where ResChaptcha = '"+Chaptcha+"';");
             result=stmt.executeQuery();
             while(result.next()){
                 Discount discount=new Discount();
-                //System.out.println("FullPrice:"+result.getInt("FullPrice"));
-                //System.out.println("MinusPrice:"+result.getInt("MinusPrice"));
-                //System.out.println("Result:"+result.getString("Result"));
-                FullPrice=result.getInt("FullPrice");
-                MinusPrice=result.getInt("MinusPrice");
-                Result=result.getString("Result");
-                discount.setFull(FullPrice);
-                discount.setMinus(MinusPrice);
-                discount.setResult(Result);
-                Discounts.add(discount);
+                //比较时间
+                stmt1=con.prepareStatement("Select * From DiscountTime Where DiscountID = '"+result.getInt("DiscountID")+"';");
+                result1=stmt1.executeQuery();
+                while(result1.next()) {
+                    java.util.Date starttime = new java.util.Date(result1.getTimestamp("StartTime").getTime());
+                    java.util.Date endtime = new java.util.Date(result1.getTimestamp("EndTime").getTime());
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Calendar c = java.util.Calendar.getInstance();
+                    java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    System.out.println(f.format(c.getTime()));
+                    try {
+                        Date current = df.parse(date);
+                        System.out.println(current);
+                        System.out.println(current.getTime());
+                        System.out.println(starttime.getTime());
+                        System.out.println(current.getTime() <= endtime.getTime());
+                        if (current.getTime() <= endtime.getTime() && current.getTime() >= starttime.getTime()) {
+
+                            //System.out.println("FullPrice:"+result.getInt("FullPrice"));
+                            //System.out.println("MinusPrice:"+result.getInt("MinusPrice"));
+                            //System.out.println("Result:"+result.getString("Result"));
+                            FullPrice = result.getInt("FullPrice");
+                            MinusPrice = result.getInt("MinusPrice");
+                            Result = result.getString("Result");
+                            java.util.Date StartTime=new java.util.Date(result1.getTimestamp("StartTime").getTime());
+                            java.util.Date EndTime=new java.util.Date(result1.getTimestamp("EndTime").getTime());
+                            discount.setFull(FullPrice);
+                            discount.setMinus(MinusPrice);
+                            discount.setResult(Result);
+                            discount.setStartTime(result1.getString("StartTime"));
+                            discount.setEndTime(result1.getString("EndTime"));
+                            Discounts.add(discount);
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
             }
             if(Discounts.size()>1) {
                 for (int i = 0; i < Discounts.size(); i++) {
@@ -81,16 +121,28 @@ public class DiscountDaoImpl implements DiscountDao {
     }
 
     @Override
-    public ArrayList<String> AddRestaurantDiscount(String FullPrice, String MinusPrice,String chaptcha) throws Exception {
+    public ArrayList<String> AddRestaurantDiscount(String FullPrice, String MinusPrice,String chaptcha,String StartTime,String EndTime) throws Exception, SQLException {
         //检查是否有重复的
         //没有重复的插入，返回
+        int y,m,d;
+        String date;
+        Calendar cal= Calendar.getInstance();
+        y=cal.get(Calendar.YEAR);
+        m=cal.get(Calendar.MONTH)+1;
+        d=cal.get(Calendar.DATE);
+        date=""+y+"-"+m+"-"+d;
+        System.out.println("StartTime:"+StartTime);
+        System.out.println("EndTime:"+EndTime);
         Connection con = null;
         PreparedStatement stmt = null;
+        PreparedStatement stmt1 = null;
         con = daoHelper.getConnection();
         ResultSet result=null;
+        ResultSet result1=null;
         boolean exist=false;
         boolean add=false;
-        int DiscountID=0;
+        boolean add1=false;
+        int DiscountID=0,TimeID=0;
        ArrayList<String> Result=new ArrayList<>();
         try {
             con=daoHelper.getConnection();
@@ -100,10 +152,28 @@ public class DiscountDaoImpl implements DiscountDao {
                 String full=result.getInt("FullPrice")+"";
                 System.out.println(full);
                 String minus=result.getInt("MinusPrice")+"";
-                if(FullPrice.equals(full)){
+                if(FullPrice.equals(full)) {
                     Result.add(FullPrice);
-                    exist=true;
-                    break;
+                    //判断已存在的优惠是否在有效期内
+                    stmt1 = con.prepareStatement("select * from DiscountTime where DiscountID = '" + result.getInt("DiscountID") + "'");
+                    result1 = stmt1.executeQuery();
+                    while (result1.next()) {
+                        java.util.Date starttime = new java.util.Date(result1.getTimestamp("StartTime").getTime());
+                        java.util.Date endtime = new java.util.Date(result1.getTimestamp("EndTime").getTime());
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                        java.util.Calendar c = java.util.Calendar.getInstance();
+                        java.text.SimpleDateFormat f = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        System.out.println(f.format(c.getTime()));
+                        Date current = df.parse(date);
+                        System.out.println(current);
+                        System.out.println(current.getTime());
+                        System.out.println(starttime.getTime());
+                        System.out.println(current.getTime() <= endtime.getTime());
+                        if (current.getTime() <= endtime.getTime() && current.getTime() >= starttime.getTime()) {
+                            exist=true;
+                            break;
+                        }
+                    }
                 }else{
                 }
             }
@@ -115,9 +185,18 @@ public class DiscountDaoImpl implements DiscountDao {
                     DiscountID=result.getInt("Max(DiscountID)");
                     DiscountID=DiscountID+1;
                 }
+                stmt=con.prepareStatement("select Max(ID) from DiscountTime");
+                result=stmt.executeQuery();
+                while(result.next()){
+                    TimeID=result.getInt("Max(ID)");
+                    TimeID=TimeID+1;
+                    System.out.println("TimeID:"+TimeID);
+                }
                 stmt=con.prepareStatement("insert into Discount(DiscountID,ResChaptcha,FullPrice,MinusPrice,Result) VALUES ("+DiscountID+",'"+chaptcha+"',"+Integer.parseInt(FullPrice)+","+Integer.parseInt(MinusPrice)+",'success')");
                 add=stmt.execute();
-                if(!add){
+                stmt1=con.prepareStatement("insert into DiscountTime(ID,DiscountID,StartTime,EndTime) VALUES ("+TimeID+",'"+DiscountID+"','"+StartTime+"','"+EndTime+"')");
+                add1=stmt1.execute();
+                if(!add||!add1){
                     Result.add("fail");
                 }else{
                     Result.add("success");

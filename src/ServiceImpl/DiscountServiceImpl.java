@@ -15,8 +15,8 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public ArrayList<String> AddRestaurantDiscount(String FullPrice, String MinusPrice,String chaptcha) throws Exception {
-        return discountDao.AddRestaurantDiscount(FullPrice,MinusPrice,chaptcha);
+    public ArrayList<String> AddRestaurantDiscount(String FullPrice, String MinusPrice,String chaptcha,String StartTime,String EndTime) throws Exception {
+        return discountDao.AddRestaurantDiscount(FullPrice,MinusPrice,chaptcha,StartTime,EndTime);
     }
 
     @Override
