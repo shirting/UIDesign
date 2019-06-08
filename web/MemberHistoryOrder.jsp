@@ -11,7 +11,13 @@
 <link href="Style/admin.css" rel="stylesheet" type="text/css">
 <link href="Style/personal.css" rel="stylesheet" type="text/css">
 <link href="Style/orstyle.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="jquery.min.js"></script>
+<link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
+<link href="//shadow.elemecdn.com/faas/desktop/profile.d24b94.css" rel="stylesheet" type="text/css">
+<link href="Style/bootstrap.min.css" type="text/css">
+
+<script type="text/javascript" src="JS/jquery.min.js"></script>
+<script type="text/javascript" src="JS/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="JS/MemberHistoryOrders.js"></script>
 <html>
 <head>
@@ -43,7 +49,30 @@
 会员按照价格查看订单，会员按照点餐次数查看，会员按照订餐时间查看，会员按照餐厅类型查看
 --%>
 <div class="center">
-    <div class="col-main">
+    <aside class="menu  col-main-2">
+        <ul>
+            <li class="person">
+                <a onclick="member()">个人中心</a>
+            </li>
+            <li class="person">
+                <a onclick="Memberaddress()">地址管理</a>
+            </li>
+            <li class="person">
+                <a onclick="MemberNowOrder()">当前订单</a>
+            </li>
+            <li class="person">
+                <a onclick="MemberHistoryOrders()">历史订单</a>
+            </li>
+            <li class="person">
+                <a onclick="DeleteMember()">注销账号</a>
+            </li>
+            <li class="person">
+                <a onclick="Logout()">退出</a>
+            </li>
+        </ul>
+
+    </aside>
+    <div class="col-main-10">
         <div class="main-wrap">
 
             <div class="user-order">
@@ -82,29 +111,7 @@
         <!--底部-->
     </div>
 
-    <aside class="menu">
-        <ul>
-            <li class="person">
-                <a onclick="member()">个人中心</a>
-            </li>
-            <li class="person">
-                <a onclick="Memberaddress()">地址管理</a>
-            </li>
-            <li class="person">
-                <a onclick="MemberNowOrder()">当前订单</a>
-            </li>
-            <li class="person">
-                <a onclick="MemberHistoryOrders()">历史订单</a>
-            </li>
-            <li class="person">
-                <a onclick="DeleteMember()">注销账号</a>
-            </li>
-            <li class="person">
-                <a onclick="Logout()">退出</a>
-            </li>
-        </ul>
 
-    </aside>
 </div>
 </body>
 </html>
