@@ -181,6 +181,25 @@ function GetNowOrders(){
             var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
                 + " " + hour + seperator2 + minute
                 + seperator2 + second;
+
+            var str="";
+
+            str=str+"<form class='am-form'>"
+                +"<table class='order-list ng-scope' ng-show='orderList.length'>"
+
+                +"<thead>"
+                +"<tr>"
+                +"<th>下单时间</th>"
+                +"<th class='order-list-infoth'>订单内容</th>"
+                +"<th></th>"
+                +"<th>支付金额（元）</th>"
+                +"<th>状态</th>"
+                +"<th>操作</th>"
+                +"</tr>"
+                +"</thead>"
+                +"<tbody>"
+                +"<tr></tr>";
+
             for(var i=0;i<result.length;i++){
                 var diff;
                 console.log(diff);
@@ -188,7 +207,31 @@ function GetNowOrders(){
                     diff=GetDateDiff(result[i].orderTime,currentdate,"second");
                     if(diff<120){
                     //显示该订单并且倒计时
-                        noworder.innerHTML +="<div>" +
+                        str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                            +"<td class='ordertimeline-time'>"
+                            +"<p ng-bind='item.formatted_created_at | date:'HH:mm'' class='ng-binding'>"+result[i].orderTime.substr(0,16)+"</p>"
+                            +"<i class='ordertimeline-time-icon icon-uniE65E finish ng-scope' ng-if='item.realStatus === 5'></i>"
+                            +"</td>"
+                            +"<td class='ordertimeline-avatar'>"
+                            +"<img src='image/test.jpg'>"
+                            +"</td>"
+                            +"<td class='ordertimeline-info'>"
+                            +"<p>订单餐厅："+result[i].RestaurantName+"</p>"
+                            +"<p>"+result[i].OrderInfo +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-amount'>"
+                            +"<p>"+result[i].orderPrice +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-status'>"
+                            +"<p>"+result[i].orderState +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-handle'>"
+                            +"<div><button id='time"+result[i].orderID+" onclick='payorder("+result[i].orderID+","+result[i].orderPrice+")'></button>"
+                            +"<button onclick='cancelbeforepay("+result[i].orderID+")'>取消订单</button></div>"
+
+                            +"</td>"
+                            +"</tr>";
+                        /*noworder.innerHTML +="<div>" +
                             " <div class=\"th th-amount\">\n" +
                             "                            <td class=\"td-inner\">"+ result[i].orderID +"</td>\n" +
                             "                            </div>\n" +
@@ -221,7 +264,7 @@ function GetNowOrders(){
                             "                            </div>" +
                             "<br><br><br><br><br></div>" +
                             "<div><button id='time"+result[i].orderID+"' onclick='payorder("+result[i].orderID+","+result[i].orderPrice+")'></button>"+
-                            "<button onclick='cancelbeforepay("+result[i].orderID+")'>取消订单</button></div><br><br>";
+                            "<button onclick='cancelbeforepay("+result[i].orderID+")'>取消订单</button></div><br><br>";*/
 
                         pay.push("time"+result[i].orderID);
                         var count=120-diff;
@@ -241,7 +284,31 @@ function GetNowOrders(){
                         window.location.href=url;
                     }else{
                         //显示
-                        noworder.innerHTML +="<div>" +
+                        str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                            +"<td class='ordertimeline-time'>"
+                            +"<p ng-bind='item.formatted_created_at | date:'HH:mm'' class='ng-binding'>"+result[i].orderTime.substr(0,16)+"</p>"
+                            +"<i class='ordertimeline-time-icon icon-uniE65E finish ng-scope' ng-if='item.realStatus === 5'></i>"
+                            +"</td>"
+                            +"<td class='ordertimeline-avatar'>"
+                            +"<img src='image/test.jpg'>"
+                            +"</td>"
+                            +"<td class='ordertimeline-info'>"
+                            +"<p>"+result[i].OrderInfo +"</p>"
+                            +"<p>订单号："+result[i].orderID+"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-amount'>"
+                            +"<p>"+result[i].orderPrice +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-status'>"
+                            +"<p>"+result[i].orderState +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-handle'>"
+                            +"<div><button id='time"+result[i].orderID+" onclick='payorder("+result[i].orderID+","+result[i].orderPrice+")'></button>"
+                            +"<button onclick='cancelafterpay("+result[i].orderID+")'>取消订单</button></div>"
+                            +"</td>"
+                            +"</tr>";
+
+                        /*noworder.innerHTML +="<div>" +
                             " <div class=\"th th-amount\">\n" +
                             "                            <td class=\"td-inner\">"+ result[i].orderID +"</td>\n" +
                             "                            </div>\n" +
@@ -274,7 +341,7 @@ function GetNowOrders(){
                             "                            </div>" +
                             "<br><br><br></div>" +
                             "<div><button id='time"+result[i].orderID+"' onclick='OrderArrived("+result[i].orderID+","+result[i].orderPrice+")'></button>"+
-                        "<button onclick='cancelafterpay("+result[i].orderID+")'>取消订单</button></div><br><br>";
+                        "<button onclick='cancelafterpay("+result[i].orderID+")'>取消订单</button></div><br><br>";*/
 
                         arrive.push(1800-diff);
                         arrive1.push("time"+result[i].orderID);
@@ -282,6 +349,9 @@ function GetNowOrders(){
                     }
                 }
             }
+
+
+
             for(var j=0;j<pay1.length;j++){
                 countDown( pay1[j],pay[j],pay2[j],function( msg ) {
                     //alert(msg);
@@ -292,6 +362,11 @@ function GetNowOrders(){
                     //alert(msg);
                 })
             }
+
+            str=str+ "</tbody>"
+                +"</table>"
+                +"</form>";
+            noworder.innerHTML+=str;
         }
     })
 }

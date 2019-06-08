@@ -30,7 +30,24 @@ function ResGetOrdersByTime(){
             var Type=document.getElementById("main");
             var tt=document.getElementById("tt");
             Type.innerHTML ="";
-            tt.innerHTML ="<div class=\"th th-amount\">\n" +
+            var str="";
+
+            str=str+"<form class='am-form'>"
+                +"<table class='order-list ng-scope' ng-show='orderList.length'>"
+
+                +"<thead>"
+                +"<tr>"
+                +"<th>下单时间</th>"
+                +"<th class='order-list-infoth'>订单内容</th>"
+                +"<th></th>"
+                +"<th>支付金额（元）</th>"
+                +"<th>状态</th>"
+                +"<th>操作</th>"
+                +"</tr>"
+                +"</thead>"
+                +"<tbody>"
+                +"<tr></tr>";
+            /*tt.innerHTML ="<div class=\"th th-amount\">\n" +
                 "                                    <td class=\"td-inner\">序号</td>\n" +
                 "                                </div>\n" +
                 "                                <div class=\"th th-amount\">\n" +
@@ -56,10 +73,42 @@ function ResGetOrdersByTime(){
                 "                                </div>\n" +
                 "                                <div class=\"th th-amount\">\n" +
                 "                                    <td class=\"td-inner\">总价</td>\n" +
-                "                                </div>";
+                "                                </div>";*/
             if(result.length>7) {
                 for (var i = 0; i < 8; i++) {
-                    Type.innerHTML +="<div class=\"th th-amount\">\n" +
+
+                    str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                        +"<td class='ordertimeline-time'>"
+                        +"<p ng-bind='item.formatted_created_at | date:'HH:mm'' class='ng-binding'>"+result[i].orderTime.substr(0,16)+"</p>"
+                        +"<i class='ordertimeline-time-icon icon-uniE65E finish ng-scope' ng-if='item.realStatus === 5'></i>"
+                        +"</td>"
+                        +"<td class='ordertimeline-avatar'>"
+                        +"<img src='image/test.jpg'>"
+                        +"</td>"
+                        +"<td class='ordertimeline-info'>"
+                        +"<p>"+result[i].OrderInfo +"</p>"
+                        +"<p>订单号："+result[i].orderID+"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-amount'>"
+                        +"<p>"+result[i].orderPrice +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-status'>"
+                        +"<p>"+result[i].orderState +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-handle'>"
+                        //+"<a class='ordertimeline-handle-detail' onclick='getOrderInfo()'>订单详情</a>"
+
+                        +"<button type='button' class='btn btn-default' title='Popover title'" +
+                        "data-container='body' data-toggle='popover' data-placement='left'" +
+                        "data-content='左侧的 Popover 中的一些内容'>" +
+                        "订单详情" +
+                        "</button>"
+
+
+                        +"</td>"
+                        +"</tr>";
+
+                    /*Type.innerHTML +="<div class=\"th th-amount\">\n" +
                         "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"th th-amount\">\n" +
@@ -86,13 +135,43 @@ function ResGetOrdersByTime(){
                         "                                <div class=\"th th-amount\">\n" +
                         "                                    <td class=\"td-inner\">"+ result[i].orderPrice +"</td>\n" +
                         "                                </div>";
-                    Type.innerHTML += "<br><br><br><br><br>";
+                    Type.innerHTML += "<br><br><br><br><br>";*/
                 }
-                Type.innerHTML +="<hr>";
+                //Type.innerHTML +="<hr>";
             }else{
                 if(result.length!=0) {
                     for (var i = 0; i < result.length; i++) {
-                        Type.innerHTML +="<div class=\"th th-amount\">\n" +
+                        str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                            +"<td class='ordertimeline-time'>"
+                            +"<p ng-bind='item.formatted_created_at | date:'HH:mm'' class='ng-binding'>"+result[i].orderTime.substr(0,16)+"</p>"
+                            +"<i class='ordertimeline-time-icon icon-uniE65E finish ng-scope' ng-if='item.realStatus === 5'></i>"
+                            +"</td>"
+                            +"<td class='ordertimeline-avatar'>"
+                            +"<img src='image/test.jpg'>"
+                            +"</td>"
+                            +"<td class='ordertimeline-info'>"
+                            +"<p>"+result[i].OrderInfo +"</p>"
+                            +"<p>订单号："+result[i].orderID+"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-amount'>"
+                            +"<p>"+result[i].orderPrice +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-status'>"
+                            +"<p>"+result[i].orderState +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-handle'>"
+                            //+"<a class='ordertimeline-handle-detail' onclick='getOrderInfo()'>订单详情</a>"
+
+                            +"<button type='button' class='btn btn-default' title='Popover title'" +
+                            "data-container='body' data-toggle='popover' data-placement='left'" +
+                            "data-content='左侧的 Popover 中的一些内容'>" +
+                            "订单详情" +
+                            "</button>"
+
+
+                            +"</td>"
+                            +"</tr>";
+                        /*Type.innerHTML +="<div class=\"th th-amount\">\n" +
                             "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                             "                                </div>\n" +
                             "                                <div class=\"th th-amount\">\n" +
@@ -119,11 +198,16 @@ function ResGetOrdersByTime(){
                             "                                <div class=\"th th-amount\">\n" +
                             "                                    <td class=\"td-inner\">"+ result[i].orderPrice +"</td>\n" +
                             "                                </div>";
-                        Type.innerHTML += "<br><br><br><br><br>";
+                        Type.innerHTML += "<br><br><br><br><br>";*/
                     }
-                    Type.innerHTML +="<hr>";
+                    //Type.innerHTML +="<hr>";
                 }
             }
+            str=str+ "</tbody>"
+                +"</table>"
+                +"</form>";
+            Type.innerHTML+=str;
+
         }
     })
 }
@@ -143,7 +227,27 @@ function ResGetOrdersByPrice(){
             var Type=document.getElementById("main");
             var tt=document.getElementById("tt");
             Type.innerHTML ="";
-            tt.innerHTML ="<div class=\"th th-amount\">\n" +
+
+            var str="";
+
+            str=str+"<form class='am-form'>"
+                +"<table class='order-list ng-scope' ng-show='orderList.length'>"
+
+                +"<thead>"
+                +"<tr>"
+                +"<th>下单时间</th>"
+                +"<th class='order-list-infoth'>订单内容</th>"
+                +"<th></th>"
+                +"<th>支付金额（元）</th>"
+                +"<th>状态</th>"
+                +"<th>操作</th>"
+                +"</tr>"
+                +"</thead>"
+                +"<tbody>"
+                +"<tr></tr>";
+
+
+            /*tt.innerHTML ="<div class=\"th th-amount\">\n" +
                 "                                    <td class=\"td-inner\">序号</td>\n" +
                 "                                </div>\n" +
                 "                                <div class=\"th th-amount\">\n" +
@@ -169,10 +273,40 @@ function ResGetOrdersByPrice(){
                 "                                </div>\n" +
                 "                                <div class=\"th th-amount\">\n" +
                 "                                    <td class=\"td-inner\">总价</td>\n" +
-                "                                </div>";
+                "                                </div>";*/
             if(result.length>7) {
                 for (var i = 0; i < 8; i++) {
-                    Type.innerHTML +="<div class=\"th th-amount\">\n" +
+                    str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                        +"<td class='ordertimeline-time'>"
+                        +"<p ng-bind='item.formatted_created_at | date:'HH:mm'' class='ng-binding'>"+result[i].orderTime.substr(0,16)+"</p>"
+                        +"<i class='ordertimeline-time-icon icon-uniE65E finish ng-scope' ng-if='item.realStatus === 5'></i>"
+                        +"</td>"
+                        +"<td class='ordertimeline-avatar'>"
+                        +"<img src='image/test.jpg'>"
+                        +"</td>"
+                        +"<td class='ordertimeline-info'>"
+                        +"<p>"+result[i].OrderInfo +"</p>"
+                        +"<p>订单号："+result[i].orderID+"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-amount'>"
+                        +"<p>"+result[i].orderPrice +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-status'>"
+                        +"<p>"+result[i].orderState +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-handle'>"
+                        //+"<a class='ordertimeline-handle-detail' onclick='getOrderInfo()'>订单详情</a>"
+
+                        +"<button type='button' class='btn btn-default' title='Popover title'" +
+                        "data-container='body' data-toggle='popover' data-placement='left'" +
+                        "data-content='左侧的 Popover 中的一些内容'>" +
+                        "订单详情" +
+                        "</button>"
+
+
+                        +"</td>"
+                        +"</tr>";
+                    /*Type.innerHTML +="<div class=\"th th-amount\">\n" +
                         "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"th th-amount\">\n" +
@@ -199,13 +333,43 @@ function ResGetOrdersByPrice(){
                         "                                <div class=\"th th-amount\">\n" +
                         "                                    <td class=\"td-inner\">"+ result[i].orderPrice +"</td>\n" +
                         "                                </div>";
-                    Type.innerHTML += "<br><br><br><br><br>";
+                    Type.innerHTML += "<br><br><br><br><br>";*/
                 }
-                Type.innerHTML +="<hr>";
+                //Type.innerHTML +="<hr>";
             }else{
                 if(result.length!=0) {
                     for (var i = 0; i < result.length; i++) {
-                        Type.innerHTML +="<div class=\"th th-amount\">\n" +
+                        str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                            +"<td class='ordertimeline-time'>"
+                            +"<p ng-bind='item.formatted_created_at | date:'HH:mm'' class='ng-binding'>"+result[i].orderTime.substr(0,16)+"</p>"
+                            +"<i class='ordertimeline-time-icon icon-uniE65E finish ng-scope' ng-if='item.realStatus === 5'></i>"
+                            +"</td>"
+                            +"<td class='ordertimeline-avatar'>"
+                            +"<img src='image/test.jpg'>"
+                            +"</td>"
+                            +"<td class='ordertimeline-info'>"
+                            +"<p>"+result[i].OrderInfo +"</p>"
+                            +"<p>订单号："+result[i].orderID+"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-amount'>"
+                            +"<p>"+result[i].orderPrice +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-status'>"
+                            +"<p>"+result[i].orderState +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-handle'>"
+                            //+"<a class='ordertimeline-handle-detail' onclick='getOrderInfo()'>订单详情</a>"
+
+                            +"<button type='button' class='btn btn-default' title='Popover title'" +
+                            "data-container='body' data-toggle='popover' data-placement='left'" +
+                            "data-content='左侧的 Popover 中的一些内容'>" +
+                            "订单详情" +
+                            "</button>"
+
+
+                            +"</td>"
+                            +"</tr>";
+                        /*Type.innerHTML +="<div class=\"th th-amount\">\n" +
                             "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                             "                                </div>\n" +
                             "                                <div class=\"th th-amount\">\n" +
@@ -232,11 +396,15 @@ function ResGetOrdersByPrice(){
                             "                                <div class=\"th th-amount\">\n" +
                             "                                    <td class=\"td-inner\">"+ result[i].orderPrice +"</td>\n" +
                             "                                </div>";
-                        Type.innerHTML += "<br><br><br><br><br>";
+                        Type.innerHTML += "<br><br><br><br><br>";*/
                     }
-                    Type.innerHTML +="<hr>";
+                    //Type.innerHTML +="<hr>";
                 }
             }
+            str=str+ "</tbody>"
+                +"</table>"
+                +"</form>";
+            Type.innerHTML+=str;
         }
     })
 }
@@ -255,7 +423,24 @@ function ResGetOrdersByMember(){
             var Type=document.getElementById("main");
             var tt=document.getElementById("tt");
             Type.innerHTML ="";
-            tt.innerHTML ="<div class=\"th th-amount\">\n" +
+            var str="";
+
+            str=str+"<form class='am-form'>"
+                +"<table class='order-list ng-scope' ng-show='orderList.length'>"
+
+                +"<thead>"
+                +"<tr>"
+                +"<th>序号</th>"
+                +"<th>会员编号</th>"
+
+                +"<th>会员名</th>"
+                +"<th>联系方式</th>"
+                +"<th>点餐次数</th>"
+                +"</tr>"
+                +"</thead>"
+                +"<tbody>"
+                +"<tr></tr>";
+            /*tt.innerHTML ="<div class=\"th th-amount\">\n" +
                 "                                    <td class=\"td-inner\">序号</td>\n" +
                 "                                </div>\n" +
                 "                                <div class=\"th th-amount\">\n" +
@@ -281,10 +466,30 @@ function ResGetOrdersByMember(){
                 "                                </div>\n" +
                 "                                <div class=\"th th-amount\">\n" +
                 "                                    <td class=\"td-inner\">点餐次数</td>\n" +
-                "                                </div>";
+                "                                </div>";*/
             if(result.length>7) {
                 for (var i = 0; i < 8; i++) {
-                    Type.innerHTML += "<div class=\"th th-amount\">\n" +
+                    str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                        +"<td class='ordertimeline-time'>"
+                        +"<p>"+i +"</p>"
+                        +"</td>"
+
+                        +"<td class='ordertimeline-info'>"
+                        +"<p>"+result[i].memberId +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-amount'>"
+                        +"<p>"+result[i].memberName +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-status'>"
+                        +"<p>"+result[i].memberPhone +"</p>"
+                        +"</td>"
+                        +"<td class='ordertimeline-handle'>"
+                        +"<p>"+result[i].MemberCount +"</p>"
+
+
+                        +"</td>"
+                        +"</tr>";
+                    /*Type.innerHTML += "<div class=\"th th-amount\">\n" +
                         "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"th th-amount\">\n" +
@@ -311,13 +516,33 @@ function ResGetOrdersByMember(){
                         "                                <div class=\"th th-amount\">\n" +
                         "                                    <td class=\"td-inner\">" + result[i].MemberCount +"</td>\n" +
                         "                                </div>";
-                    Type.innerHTML +="<br><br><br><br>"
+                    Type.innerHTML +="<br><br><br><br>"*/
                 }
-                Type.innerHTML +="<hr>";
+                //Type.innerHTML +="<hr>";
             }else{
                 if(result.length!=0) {
                     for (var i = 0; i < result.length; i++) {
-                        Type.innerHTML += "<div class=\"th th-amount\">\n" +
+                        str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
+                            +"<td class='ordertimeline-time'>"
+                            +"<p>"+i +"</p>"
+                            +"</td>"
+
+                            +"<td class='ordertimeline-info'>"
+                            +"<p>"+result[i].memberId +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-amount'>"
+                            +"<p>"+result[i].memberName +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-status'>"
+                            +"<p>"+result[i].memberPhone +"</p>"
+                            +"</td>"
+                            +"<td class='ordertimeline-handle'>"
+                            +"<p>"+result[i].MemberCount +"</p>"
+
+
+                            +"</td>"
+                            +"</tr>";
+                        /*Type.innerHTML += "<div class=\"th th-amount\">\n" +
                             "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                             "                                </div>\n" +
                             "                                <div class=\"th th-amount\">\n" +
@@ -344,11 +569,15 @@ function ResGetOrdersByMember(){
                             "                                <div class=\"th th-amount\">\n" +
                             "                                    <td class=\"td-inner\">" + result[i].MemberCount +"</td>\n" +
                             "                                </div>";
-                        Type.innerHTML +="<br><br><br><br>"
+                        Type.innerHTML +="<br><br><br><br>"*/
                     }
-                    Type.innerHTML +="<hr>";
+                    //Type.innerHTML +="<hr>";
                 }
             }
+            str=str+ "</tbody>"
+                +"</table>"
+                +"</form>";
+            Type.innerHTML+=str;
         }
     })
 }

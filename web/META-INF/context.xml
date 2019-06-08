@@ -9,7 +9,7 @@
             maxWait="10000"
             logAbandoned="true"
             username="root"
-            password="shi19980801,."
+            password="123456"
             driverClassName="com.mysql.jdbc.Driver"
             url="jdbc:mysql://127.0.0.1:3306/YUMMY1?characterEncoding=UTF8"/>
     <dependency>

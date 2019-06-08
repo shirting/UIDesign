@@ -14,13 +14,26 @@
     <link href="Style/amazeui.css" rel="stylesheet">
     <link href="Style/personal.css" rel="stylesheet" type="text/css">
     <link href="Style/orstyle.css" rel="stylesheet" type="text/css">
+    <link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
+    <link href="//shadow.elemecdn.com/faas/desktop/profile.d24b94.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="JS/RestaurantHistoryOrder.js"></script>
 
 </head>
 <body onload="ResGetOrdersByTime()">
 <div class="center">
-    <div class="col-main">
+    <aside class="menu  col-main-2">
+        <ul>
+            <li class="person">
+                <a onclick="RestaurantInfo()">餐厅中心</a>
+            </li>
+            <li class="person">
+                <a onclick="RestaurantLogout()">退出</a>
+            </li>
+        </ul>
+
+    </aside>
+    <div class="col-main-10">
         <div class="main-wrap">
 
             <div class="user-order">
@@ -41,7 +54,7 @@
 
                     <div class="am-tabs-bd">
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-                            <div class="order-top" id="tt">
+                            <!--<div class="order-top" id="tt">
                                 <div class="th th-amount">
                                     <td class="td-inner">序号</td>
                                 </div>
@@ -69,7 +82,7 @@
                                 <div class="th th-amount">
                                     <td class="td-inner">总价</td>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="order-main">
                                 <div class="order-list" id="main">
@@ -85,17 +98,7 @@
         <!--底部-->
     </div>
 
-    <aside class="menu">
-        <ul>
-            <li class="person">
-                <a onclick="RestaurantInfo()">餐厅中心</a>
-            </li>
-            <li class="person">
-                <a onclick="RestaurantLogout()">退出</a>
-            </li>
-        </ul>
 
-    </aside>
 </div>
 </body>
 </html>
