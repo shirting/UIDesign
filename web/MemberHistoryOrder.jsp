@@ -14,10 +14,19 @@
 <link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
 <link href="//shadow.elemecdn.com/faas/desktop/profile.d24b94.css" rel="stylesheet" type="text/css">
 <link href="Style/bootstrap.min.css" type="text/css">
-
+<style>
+    .am-table am-table-striped am-table-hover am-table-centered tr td{
+        text-overflow: ellipsis;
+        -moz-text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: left;
+    }
+</style>
+<script type="text/javascript" src="JS/echarts.min.js"></script>
+<script type="text/javascript" src="JS/macarons.js"></script>
 <script type="text/javascript" src="JS/jquery.min.js"></script>
 <script type="text/javascript" src="JS/bootstrap.min.js"></script>
-
 <script type="text/javascript" src="JS/MemberHistoryOrders.js"></script>
 <html>
 <head>
@@ -91,7 +100,7 @@
                         <li><a onclick="GetOrdersByOrderTime()">按点餐时间排序</a></li>
                     </ul>
 
-                    <div class="am-tabs-bd">
+                    <div class="am-tabs-bd" id="statistic" style="display:none">
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                             <div class="order-top" id="tt">
                             </div>
@@ -102,6 +111,59 @@
 
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div id="marketsByOrderSum" style="display:none;position:relative;top: 20px;width:100%;height:450px;background-color: white">
+                        <div class="am-g">
+                            <div class="am-u-sm-6" id="pie" style="height:430px">
+
+                            </div>
+                            <div class="am-u-sm-6" id="top" style="position: relative;top: 30px;height:430px">
+                                <!--<table class="am-table am-table-striped am-table-hover">
+                                    <strong style="font-weight:bold;font-size: 1.5rem;color:rosybrown">餐厅点餐次数TOP5</strong>
+                                    <thead>
+                                    <tr style="font-weight:bold">
+                                        <th>餐厅名称</th>
+                                        <th>餐厅类型</th>
+                                        <th>餐厅地址</th>
+                                        <th>点餐次数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>麦当劳</td>
+                                        <td>快餐便当</td>
+                                        <td>江苏省-南京市-鼓楼区-广州路100号</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>麦当劳</td>
+                                        <td>快餐便当</td>
+                                        <td>广州路100号</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>麦当劳</td>
+                                        <td>快餐便当</td>
+                                        <td>广州路100号</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>麦当劳</td>
+                                        <td>快餐便当</td>
+                                        <td>广州路100号</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>麦当劳</td>
+                                        <td>快餐便当</td>
+                                        <td>广州路100号</td>
+                                        <td>23</td>
+                                    </tr>
+                                    </tbody>
+                                </table>-->
+                            </div>
                         </div>
                     </div>
 

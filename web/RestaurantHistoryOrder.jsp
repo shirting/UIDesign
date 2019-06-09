@@ -16,6 +16,8 @@
     <link href="Style/orstyle.css" rel="stylesheet" type="text/css">
     <link href="//shadow.elemecdn.com/faas/desktop/vendor.2e9f33.css" rel="stylesheet">
     <link href="//shadow.elemecdn.com/faas/desktop/profile.d24b94.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="JS/echarts.min.js"></script>
+    <script type="text/javascript" src="JS/macarons.js"></script>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="JS/RestaurantHistoryOrder.js"></script>
 
@@ -52,7 +54,7 @@
                         <li class=""><a onclick="ResGetOrdersByMember()">按点餐次数排序</a></li>
                     </ul>
 
-                    <div class="am-tabs-bd">
+                    <div class="am-tabs-bd" id="statistic">
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                             <!--<div class="order-top" id="tt">
                                 <div class="th th-amount">
@@ -91,6 +93,18 @@
 
                         </div>
                     </div>
+
+                    <div id="membersByOrderSum" style="display:none;position:relative;top: 20px;width:100%;height:450px;background-color: white">
+                        <div class="am-g">
+                            <div class="am-u-sm-6" id="pie" style="height:430px">
+
+                            </div>
+                            <div class="am-u-sm-6" id="top" style="position: relative;top: 30px;height:430px">
+
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>

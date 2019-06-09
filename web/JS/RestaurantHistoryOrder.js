@@ -16,6 +16,9 @@ function ResGetOrdersByTime(){
     var thisURL=decodeURI(window.location.href);
     var name=thisURL.split('~')[1];
     chaptcha=thisURL.split('~')[2];
+
+    var sta = document.getElementById("membersByOrderSum");
+    sta.style.display = 'none';
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -212,6 +215,9 @@ function ResGetOrdersByTime(){
     })
 }
 function ResGetOrdersByPrice(){
+    var sta = document.getElementById("membersByOrderSum");
+    sta.style.display = 'none';
+
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -409,6 +415,23 @@ function ResGetOrdersByPrice(){
     })
 }
 function ResGetOrdersByMember(){
+    var sta = document.getElementById("membersByOrderSum");
+    sta.style.display = 'block';
+    var sta = document.getElementById("statistic");
+    sta.style.display = 'none';
+
+    var div = document.getElementById("pie");
+    var pie = echarts.init(div);
+
+    var orders = document.getElementById("top");
+    orders.innerHTML = "";
+
+    var marketname = [];
+    var number = [];
+    var res = [];
+    var markettype = [];
+    var marketaddress = [];
+
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -419,165 +442,126 @@ function ResGetOrdersByMember(){
             "Chaptcha":chaptcha,
         },
         success:function(result){
-            console.log(result)
-            var Type=document.getElementById("main");
-            var tt=document.getElementById("tt");
-            Type.innerHTML ="";
-            var str="";
-
-            str=str+"<form class='am-form'>"
-                +"<table class='order-list ng-scope' ng-show='orderList.length'>"
-
-                +"<thead>"
-                +"<tr>"
-                +"<th>序号</th>"
-                +"<th>会员编号</th>"
-
-                +"<th>会员名</th>"
-                +"<th>联系方式</th>"
-                +"<th>点餐次数</th>"
-                +"</tr>"
-                +"</thead>"
-                +"<tbody>"
-                +"<tr></tr>";
-            /*tt.innerHTML ="<div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">序号</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">会员编号</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">会员名</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">联系方式</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">点餐次数</td>\n" +
-                "                                </div>";*/
-            if(result.length>7) {
-                for (var i = 0; i < 8; i++) {
-                    str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
-                        +"<td class='ordertimeline-time'>"
-                        +"<p>"+i +"</p>"
-                        +"</td>"
-
-                        +"<td class='ordertimeline-info'>"
-                        +"<p>"+result[i].memberId +"</p>"
-                        +"</td>"
-                        +"<td class='ordertimeline-amount'>"
-                        +"<p>"+result[i].memberName +"</p>"
-                        +"</td>"
-                        +"<td class='ordertimeline-status'>"
-                        +"<p>"+result[i].memberPhone +"</p>"
-                        +"</td>"
-                        +"<td class='ordertimeline-handle'>"
-                        +"<p>"+result[i].MemberCount +"</p>"
-
-
-                        +"</td>"
-                        +"</tr>";
-                    /*Type.innerHTML += "<div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">||</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">" + result[i].memberId +"</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">||</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">"+ result[i].memberName + "</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">||</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">"+ result[i].memberPhone +"</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">||</td>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"th th-amount\">\n" +
-                        "                                    <td class=\"td-inner\">" + result[i].MemberCount +"</td>\n" +
-                        "                                </div>";
-                    Type.innerHTML +="<br><br><br><br>"*/
-                }
-                //Type.innerHTML +="<hr>";
-            }else{
-                if(result.length!=0) {
-                    for (var i = 0; i < result.length; i++) {
-                        str=str+"<tr class='timeline' order-timeline ng-repeat='item in orderList'>"
-                            +"<td class='ordertimeline-time'>"
-                            +"<p>"+i +"</p>"
-                            +"</td>"
-
-                            +"<td class='ordertimeline-info'>"
-                            +"<p>"+result[i].memberId +"</p>"
-                            +"</td>"
-                            +"<td class='ordertimeline-amount'>"
-                            +"<p>"+result[i].memberName +"</p>"
-                            +"</td>"
-                            +"<td class='ordertimeline-status'>"
-                            +"<p>"+result[i].memberPhone +"</p>"
-                            +"</td>"
-                            +"<td class='ordertimeline-handle'>"
-                            +"<p>"+result[i].MemberCount +"</p>"
-
-
-                            +"</td>"
-                            +"</tr>";
-                        /*Type.innerHTML += "<div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">||</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">" + result[i].memberId +"</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">||</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">"+ result[i].memberName + "</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">||</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">"+ result[i].memberPhone +"</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">||</td>\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"th th-amount\">\n" +
-                            "                                    <td class=\"td-inner\">" + result[i].MemberCount +"</td>\n" +
-                            "                                </div>";
-                        Type.innerHTML +="<br><br><br><br>"*/
+            console.log(result);
+            var len = result.length;
+            // alert(len);
+            for(var i=0;i<len;i++){
+                var datainfo = {};
+                //alert(result[i].resName);
+                var name = result[i].memberName;
+                var num = result[i].MemberCount;
+                var id = result[i].memberId;
+                var address = result[i].memberPhone;
+                marketname[i]=name;
+                number[i]=num;
+                markettype[i]=id;
+                marketaddress[i]=address;
+                datainfo.value = num;
+                datainfo.name = name;
+                res[i]=datainfo;
+            }
+            console.log(marketname);
+            console.log(res);
+            option = {
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient : 'vertical',
+                    x : 'left',
+                    data:marketname
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel'],
+                            option: {
+                                funnel: {
+                                    x: '25%',
+                                    width: '50%',
+                                    funnelAlign: 'center',
+                                    max: 1548
+                                }
+                            }
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
                     }
-                    //Type.innerHTML +="<hr>";
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'会员点餐次数',
+                        type:'pie',
+                        radius : ['50%', '70%'],
+                        itemStyle : {
+                            normal : {
+                                label : {
+                                    show : true
+                                },
+                                labelLine : {
+                                    show : true
+                                }
+                            },
+                            emphasis : {
+                                label : {
+                                    show : true,
+                                    position : 'center',
+                                    textStyle : {
+                                        fontSize : '30',
+                                        fontWeight : 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        data:res
+                    }
+                ]
+            };
+            pie.setOption(option);
+
+            //将top榜实现
+            orders.innerHTML += " <table class=\"am-table am-table-striped am-table-hover\">\n" +
+                "                                    <strong style=\"font-weight:bold;font-size: 1.5rem;color:rosybrown\">会员点餐次数TOP5</strong>\n" +
+                "                                    <thead>\n" +
+                "                                    <tr style=\"font-weight:bold\">\n" +
+                "                                        <th>会员编号</th>\n" +
+                "                                        <th>会员名称</th>\n" +
+                "                                        <th>联系方式</th>\n" +
+                "                                        <th>点餐次数</th>\n" +
+                "                                    </tr>\n" +
+                "                                    </thead>\n" +
+                "                                    <tbody id=\"tbd\">\n" +
+                "                                    </tbody>\n" +
+                "                                </table>";
+
+            var tbody = document.getElementById("tbd");
+            tbody.innerHTML = "";
+            if(len<5){
+                for(var x = 0;x<len;x++){
+                    tbody.innerHTML +="<tr>\n" +
+                        "                                        <td>"+markettype[x]+"</td>\n" +
+                        "                                        <td>"+marketname[x]+"</td>\n" +
+                        "                                        <td>"+marketaddress[x]+"</td>\n" +
+                        "                                        <td>"+number[x]+"</td>\n" +
+                        "               </tr>";
                 }
             }
-            str=str+ "</tbody>"
-                +"</table>"
-                +"</form>";
-            Type.innerHTML+=str;
+            else{
+                for(var y = 0;y<5;y++){
+                    tbody.innerHTML +="<tr>\n" +
+                        "                                        <td>"+markettype[y]+"</td>\n" +
+                        "                                        <td>"+marketname[y]+"</td>\n" +
+                        "                                        <td>"+marketaddress[y]+"</td>\n" +
+                        "                                        <td>"+number[y]+"</td>\n" +
+                        "               </tr>";
+                }
+            }
         }
     })
 }
