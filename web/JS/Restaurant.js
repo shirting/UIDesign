@@ -22,7 +22,7 @@ function RestaurantInfo() {
     chaptcha = thisURL.split('~')[2];
     var main = document.getElementById("main1");
     var main1 = document.getElementById("main");
-    main1.innerHTML= "";
+    main1.innerHTML = "";
     main.innerHTML = "";
     main.innerHTML += " <div class=\"am-form-group\">\n" +
         "                        <label for=\"chaptcha\" class=\"am-form-label\">编码</label>\n" +
@@ -53,7 +53,7 @@ function RestaurantInfo() {
         "                        <div class=\"am-form-content\">\n" +
         "                            <input type=\"text\" readonly=\"readonly\" id=\"type\"/>\n" +
         "                        </div>\n" +
-        "                    </div>"+
+        "                    </div>" +
         "<div class=\"am-form\">\n" +
         "        <button class=\"am-btn am-btn-danger\"  onclick=\"EditRestaurantInfo()\" type=\"submit\" id=\"editinfo\" style='background-position: center;width:15%;margin-left: 20% ' >保存</button>\n" +
         "      </div>";
@@ -126,7 +126,7 @@ function Dishes() {
     name = thisURL.split('~')[1];
     chaptcha = thisURL.split('~')[2];
     var main1 = document.getElementById("main1");
-    main1.innerHTML= "";
+    main1.innerHTML = "";
     //得到已有的优惠
     $.ajax({
         type: "POST",
@@ -135,9 +135,8 @@ function Dishes() {
         url: "GetRestaurantDishServlet",
         success: function (result) {
             console.log(result)
-            var main = document.getElementById("main");
+            var main = document.getElementById("main1");
             main.innerHTML = "<div id=\"success\">\n" +
-
                 "</div>\n" +
                 "<a>新增菜品</a>\n" +
                 "<div id=\"newdish\">\n" +
@@ -159,10 +158,81 @@ function Dishes() {
                 "<div id='discount'>\n" +
                 "</div>\n" +
                 "</div>\n" +
-                "<button  class=\"btn btn-danger btn-sm\" onclick='DeleteDish(" + number1 + ")'>删除</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"btn btn-success btn-sm\" onclick=\"AddDish()\">添加</button>"+" <a class=\"new-abtn-type\" data-am-modal=\"{target: '#doc-modal-1', closeViaDimmer: 0}\">添加新地址</a>\n" +
-                "                <!--例子-->\n" +
-                "                <div class=\"am-modal am-modal-no-btn\" id=\"doc-modal-1\">\n" +
-                "\n" +
+                "<button  class=\"btn btn-danger btn-sm\" onclick='DeleteDish(" + number1 + ")'>删除</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class=\"btn btn-success btn-sm\" onclick=\"AddDish()\">添加</button>";
+            var success = document.getElementById("success");
+            //var doing =document.getElementById("doing");
+
+            for (var i = 0; i < result.length; i++) {
+                console.log(result[i]);
+                success.innerHTML += "<div class=\"shopmenu-food ng-isolate-scope\" ng-class=\"{noimg: !food.image_path}\"\n" +
+                    "                                 id=\"1721446724\" ng-repeat=\"food in category.foods\" shop-menu-item=\"\" food=\"food\"\n" +
+                    "                                 shop=\"shopCache\"><!-- ngIf: food.image_path --><span class=\"col-1 ng-scope\"\n" +
+                    "                                                                                      ng-if=\"food.image_path\"><a\n" +
+                    "                                    href=\"javascript:\" ng-click=\"showInfo(food)\"><img\n" +
+                    "                                    ng-src=\"//fuss10.elemecdn.com/6/f8/b5a4ac071e1a27e5cc5fbe5c7b517jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85\"\n" +
+                    "                                    alt=\"单人套餐的图片\"\n" +
+                    "                                    src=\"//fuss10.elemecdn.com/6/f8/b5a4ac071e1a27e5cc5fbe5c7b517jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85\"></a></span>\n" +
+                    "                                <!-- end ngIf: food.image_path -->\n" +
+                    "                                <div class=\"col-2 shopmenu-food-main\"><h3\n" +
+                    "                                        class=\"shopmenu-food-name ui-ellipsis ng-binding\">" + result[i].Dishname + "</h3>\n" +
+                    "                                    <p class=\"color-mute ui-ellipsis ng-binding\" tooltip='" + result[i].DishInfo + "'" +
+                    "                                    <p>\n" +
+                    "                                    <span class=\"color-mute ng-binding\">还剩" + result[i].DishAmount + "份</span></p>\n" +
+                    "                                    <p>\n" +
+                    "                                    <span class=\"color-mute ng-binding\">" + result[i].DishInfo + "</span></p>\n" +
+                    "                                </div>\n" +
+                    "                                <span class=\"col-3 shopmenu-food-price color-stress ng-binding\">" + result[i].DishPrice + "<small\n" +
+                    "                                        class=\"ng-binding\"></small>\n" +
+                    "                                    <!-- ngIf: food.min_purchase && food.min_purchase > 1 --></span> " +
+                    "                                    <!-- end ngIf: !cartItem.quantity && menuFood.stock -->\n" +
+                    "                                    <!-- ngIf: !menuFood.stock -->\n" +
+                    "                                    <!-- ngIf: cartItem.quantity > 0 || cartItem.quantity === '' --></div>\n" +
+                    "                                    <!-- end ngIf: !menuFood.hasSpec --><!-- ngIf: menuFood.hasSpec --></div></span>\n" +
+                    "                            </div><!-- end ngRepeat: food in category.foods -->";
+
+            }
+            success.innerHTML += "<hr>";
+
+        }
+    })
+}
+
+function Discount() {
+    //显示已有的优惠
+    //新增优惠
+    var thisURL = decodeURI(window.location.href);
+    chaptcha = thisURL.split('~')[2];
+    var main1 = document.getElementById("main1");
+    main1.innerHTML = "";
+    //得到已有的优惠
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        data: {"chaptcha": chaptcha},
+        url: "GetRestaurantDiscountServlet",
+        success: function (result) {
+            console.log(result);
+            var main = document.getElementById("main1");
+            main.innerHTML =
+                "<div id=\"success\">\n" +
+                "    已有优惠：\n" +
+                "</div>\n" +
+                "<a>新增优惠</a>\n" +
+                "<div id=\"newdiscount\">\n" +
+                "<div id='" + number + "'>\n" +
+                "    满：\n" +
+                "    <input id=\"FullPrice\" type=\"text\"/>\n" +
+                "    减：\n" +
+                "    <input id=\"MinusPrice\" type=\"text\"/>\n" +
+                "  <br><br>  开始时间：\n" +
+                "    <input id=\"startTime\" type=\"date\" value=\"2019-06-01\"/>\n" +
+                " <br><br>   截止时间：\n" +
+                "    <input id=\"endTime\" type=\"date\" value=\"2019-06-01\"/>\n" +
+                "</div>\n" +
+                "<div id='discount'>\n" +
+                "</div>\n" +
+                "</div>\n" +
+                "<button onclick=\"AddDiscount()\">添加</button>" +
                 "                    <div class=\"add-dress\">\n" +
                 "\n" +
                 "                        <!--标题 -->\n" +
@@ -210,82 +280,7 @@ function Dishes() {
                 "                            </form>\n" +
                 "                        </div>\n" +
                 "\n" +
-                "                    </div>\n" +
-                "\n" +
-                "                </div>";
-            var success = document.getElementById("success");
-            //var doing =document.getElementById("doing");
-
-            for (var i = 0; i < result.length; i++) {
-                console.log(result[i]);
-                success.innerHTML += "<div class=\"shopmenu-food ng-isolate-scope\" ng-class=\"{noimg: !food.image_path}\"\n" +
-                    "                                 id=\"1721446724\" ng-repeat=\"food in category.foods\" shop-menu-item=\"\" food=\"food\"\n" +
-                    "                                 shop=\"shopCache\"><!-- ngIf: food.image_path --><span class=\"col-1 ng-scope\"\n" +
-                    "                                                                                      ng-if=\"food.image_path\"><a\n" +
-                    "                                    href=\"javascript:\" ng-click=\"showInfo(food)\"><img\n" +
-                    "                                    ng-src=\"//fuss10.elemecdn.com/6/f8/b5a4ac071e1a27e5cc5fbe5c7b517jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85\"\n" +
-                    "                                    alt=\"单人套餐的图片\"\n" +
-                    "                                    src=\"//fuss10.elemecdn.com/6/f8/b5a4ac071e1a27e5cc5fbe5c7b517jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85\"></a></span>\n" +
-                    "                                <!-- end ngIf: food.image_path -->\n" +
-                    "                                <div class=\"col-2 shopmenu-food-main\"><h3\n" +
-                    "                                        class=\"shopmenu-food-name ui-ellipsis ng-binding\">" + result[i].Dishname + "</h3>\n" +
-                    "                                    <p class=\"color-mute ui-ellipsis ng-binding\" tooltip='" + result[i].DishInfo + "'" +
-                    "                                    <p>\n" +
-                    "                                    <span class=\"color-mute ng-binding\">还剩" + result[i].DishAmount + "份</span></p>\n" +
-                    "                                    <p>\n" +
-                    "                                    <span class=\"color-mute ng-binding\">" + result[i].DishInfo + "</span></p>\n" +
-                    "                                </div>\n" +
-                    "                                <span class=\"col-3 shopmenu-food-price color-stress ng-binding\">" + result[i].DishPrice + "<small\n" +
-                    "                                        class=\"ng-binding\"></small>\n" +
-                    "                                    <!-- ngIf: food.min_purchase && food.min_purchase > 1 --></span> " +
-                    "                                    <!-- end ngIf: !cartItem.quantity && menuFood.stock -->\n" +
-                    "                                    <!-- ngIf: !menuFood.stock -->\n" +
-                    "                                    <!-- ngIf: cartItem.quantity > 0 || cartItem.quantity === '' --></div>\n" +
-                    "                                    <!-- end ngIf: !menuFood.hasSpec --><!-- ngIf: menuFood.hasSpec --></div></span>\n" +
-                    "                            </div><!-- end ngRepeat: food in category.foods -->";
-
-            }
-            success.innerHTML += "<hr>";
-
-        }
-    })
-}
-
-function Discount() {
-    //显示已有的优惠
-    //新增优惠
-    var thisURL = decodeURI(window.location.href);
-    chaptcha = thisURL.split('~')[2];
-    var main1 = document.getElementById("main1");
-    main1.innerHTML= "";
-    //得到已有的优惠
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        data: {"chaptcha": chaptcha},
-        url: "GetRestaurantDiscountServlet",
-        success: function (result) {
-            console.log(result);
-            var main = document.getElementById("main");
-            main.innerHTML = "<div id=\"success\">\n" +
-                "    已有优惠：\n" +
-                "</div>\n" +
-                "<a>新增优惠</a>\n" +
-                "<div id=\"newdiscount\">\n" +
-                "<div id='" + number + "'>\n" +
-                "    满：\n" +
-                "    <input id=\"FullPrice\" type=\"text\"/>\n" +
-                "    减：\n" +
-                "    <input id=\"MinusPrice\" type=\"text\"/>\n" +
-            "  <br><br>  开始时间：\n" +
-            "    <input id=\"startTime\" type=\"date\" value=\"2019-06-01\"/>\n" +
-            " <br><br>   截止时间：\n" +
-            "    <input id=\"endTime\" type=\"date\" value=\"2019-06-01\"/>\n" +
-                "</div>\n" +
-                "<div id='discount'>\n" +
-                "</div>\n" +
-                "</div>\n" +
-                "<button onclick=\"AddDiscount()\">添加</button>";
+                "                    </div>\n";
             var success = document.getElementById("success");
             //var doing =document.getElementById("doing");
             for (var i = 0; i < result.length; i++) {
@@ -300,7 +295,7 @@ function Discount() {
                     " 开始时间：\n" +
                     result[i].StartTime.split(" ")[0] +
                     "    截止时间：\n" +
-                    result[i].EndTime.split(" ")[0  ] +
+                    result[i].EndTime.split(" ")[0] +
                     "</div>  \n" +
                     "<button onclick='deleteDiscount(" + result[i].Full + "," + chaptcha + "," + result[i].Minus + ")'>删除</button>";
             }
@@ -333,15 +328,15 @@ function AddDiscount() {
     chaptcha = thisURL.split('~')[2];
     //var FullPrice=new Array();
     //var MinusPrice=new Array();
-    var full, minus,starttime,endtime;
+    var full, minus, starttime, endtime;
     newdiscount = document.getElementById("newdiscount");
     //alert(newdiscount.childNodes[1].childElementCount);
     if (newdiscount.childNodes[1].childElementCount != 0) {
         console.log(newdiscount.childNodes[1].children[0].value);
         full = newdiscount.childNodes[1].children[0].value;
         minus = newdiscount.childNodes[1].children[1].value;
-        starttime=newdiscount.childNodes[1].children[4].value;
-        endtime=newdiscount.childNodes[1].children[7].value;
+        starttime = newdiscount.childNodes[1].children[4].value;
+        endtime = newdiscount.childNodes[1].children[7].value;
         console.log(starttime);
         console.log(endtime);
         //alert(FullPrice);
@@ -360,8 +355,8 @@ function AddDiscount() {
             "FullPrice": full,
             "MinusPrice": minus,
             "chaptcha": chaptcha,
-            "StartTime":starttime,
-            "EndTime":endtime
+            "StartTime": starttime,
+            "EndTime": endtime
         },
         success: function (result) {
             //alert(result);

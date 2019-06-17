@@ -70,6 +70,12 @@
       </div>
       <div id="info">
       <form action="" class="am-form" data-am-validator>
+        <div>&nbsp&nbsp
+          <input type="radio" name="role" value="Member" checked="checked" onclick="Member()">&nbsp&nbsp会员
+          <input type="radio" name="role" value="Restaurant" onclick="Restaurant()">&nbsp&nbsp餐厅
+          <input type="radio" name="role" value="YUMMY" onclick="Yummy()">&nbsp&nbspYUMMY!经理
+        </div>
+        <br>
         <div class="am-form-group">
           <!--
              <label for="doc-vld-name-2"><i class="am-icon-user"></i></label>
@@ -83,11 +89,6 @@
                      </label>
                      -->
           <input type="password" id="password" placeholder="输入密码" required/>
-        </div>
-        <div>&nbsp&nbsp
-          <input type="radio" name="role" value="Member" checked="checked" onclick="Member()">&nbsp&nbsp会员
-          <input type="radio" name="role" value="Restaurant" onclick="Restaurant()">&nbsp&nbsp餐厅
-          <input type="radio" name="role" value="YUMMY" onclick="Yummy()">&nbsp&nbspYUMMY!经理
         </div>
       </form>
       <div class="am-form">

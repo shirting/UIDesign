@@ -8,11 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="Style/admin.css" rel="stylesheet" type="text/css">
     <link href="Style/amazeui.css" rel="stylesheet" type="text/css">
     <link href="Style/personal.css" rel="stylesheet" type="text/css">
     <link href="Style/infstyle.css" rel="stylesheet" type="text/css">
-    <link href="Style/addstyle.css" rel="stylesheet" type="text/css">
     <!--<link href="Style/dlstyle.css" rel="stylesheet" type="text/css">
 
     <link href="Style/addstyle.css" rel="stylesheet" type="text/css">-->
@@ -58,18 +56,20 @@
             </ul>
 
         </aside>
-        <div class="main-wrap">
-            <div class="user-address">
-                <div class="am-cf am-padding">
-                    <div class="am-fl am-cf">
-                        <strong class="am-text-danger am-text-lg">基本信息</strong>
-                        &nbsp
+
+        <div class="col-main-10">
+            <div class="main-wrap">
+                <div class="user-address">
+                    <div class="am-cf am-padding">
+                        <div class="am-fl am-cf">
+                            <strong class="am-text-danger am-text-lg">基本信息</strong>
+                            &nbsp
                         </div>
-                </div>
-                <hr/>
-                <div id='main1' class="info-main">
-                    <button class="am-btn am-btn-danger" onclick="EditRestaurantInfo()" id="editinfo">保存</button>
-                </div>
+                    </div>
+                    <hr/>
+                    <div id='main1' class="info-main">
+                        <button class="am-btn am-btn-danger" onclick="EditRestaurantInfo()" id="editinfo">保存</button>
+                    </div>
                     <div style='padding-left: 2%;padding-right: 2%;' ng-show="!loading" class="shopmenu-main grid"
                          ng-class="{grid: displayType === 'grid', list: displayType === 'list'}"
                          style="margin-top: 0px;">
@@ -86,27 +86,27 @@
                         </div>
                     </div>
                     <div id="clean"></div>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $(".new-option-r").click(function () {
-                            $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
-                        });
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $(".new-option-r").click(function () {
+                                $(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
+                            });
 
-                        var $ww = $(window).width();
-                        if ($ww > 640) {
-                            $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
-                        }
+                            var $ww = $(window).width();
+                            if ($ww > 640) {
+                                $("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
+                            }
 
-                    })
-                </script>
+                        })
+                    </script>
 
-                <div class="clear"></div>
+                    <div class="clear"></div>
 
+                </div>
+                <!--底部-->
             </div>
-            <!--底部-->
         </div>
-        </div>
-
+    </div>
 </div>
 </body>
 </html>

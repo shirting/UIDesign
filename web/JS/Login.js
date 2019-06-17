@@ -118,6 +118,12 @@ function YummyLogin(){
 function Member(){
     var Member=document.getElementById("info");
     Member.innerHTML = "      <form action=\"\" class=\"am-form\" data-am-validator>\n" +
+        "        <div>&nbsp&nbsp\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"Member\" checked=\"checked\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"Restaurant\" onclick=\"Restaurant()\">&nbsp&nbsp餐厅\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"YUMMY\" onclick=\"Yummy()\">&nbsp&nbspYUMMY!经理\n" +
+        "        </div>\n" +
+        "        <br>\n"+
         "        <div class=\"am-form-group\">\n" +
         "          <!--\n" +
         "             <label for=\"doc-vld-name-2\"><i class=\"am-icon-user\"></i></label>\n" +
@@ -132,11 +138,6 @@ function Member(){
         "                     -->\n" +
         "          <input type=\"password\" id=\"password\" placeholder=\"输入密码\" required/>\n" +
         "        </div>\n" +
-        "        <div>&nbsp&nbsp\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"Member\" checked=\"checked\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"Restaurant\" onclick=\"Restaurant()\">&nbsp&nbsp餐厅\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"YUMMY\" onclick=\"Yummy()\">&nbsp&nbspYUMMY!经理\n" +
-        "        </div>\n" +
         "      </form>\n" +
         "      <div class=\"am-form\">\n" +
         "        <button class=\"am-form am-btn am-btn-secondary\"  onclick=\"MemberLogin()\" type=\"submit\">登录</button>\n" +
@@ -146,6 +147,12 @@ function Member(){
 function Restaurant(){
     var Restaurant =document.getElementById("info");
     Restaurant.innerHTML ="      <form action=\"\" class=\"am-form\" data-am-validator>\n" +
+        "        <div>&nbsp&nbsp\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"Member\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"Restaurant\" checked=\"checked\"  onclick=\"Restaurant()\">&nbsp&nbsp餐厅\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"YUMMY\" onclick=\"Yummy()\">&nbsp&nbspYUMMY!经理\n" +
+        "        </div>\n" +
+        "        <br>"+
         "        <div class=\"am-form-group\">\n" +
         "          <!--\n" +
         "             <label for=\"doc-vld-name-2\"><i class=\"am-icon-user\"></i></label>\n" +
@@ -160,11 +167,6 @@ function Restaurant(){
         "                     -->\n" +
         "          <input type=\"text\" id=\"chaptcha\" placeholder=\"输入编码\" required/>\n" +
         "        </div>\n" +
-        "        <div>&nbsp&nbsp\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"Member\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"Restaurant\" checked=\"checked\"  onclick=\"Restaurant()\">&nbsp&nbsp餐厅\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"YUMMY\" onclick=\"Yummy()\">&nbsp&nbspYUMMY!经理\n" +
-        "        </div>\n" +
         "      </form>\n" +
         "      <div class=\"am-form\">\n" +
         "        <button class=\"am-form am-btn am-btn-secondary\"  onclick=\"RestaurantLogin()\" type=\"submit\">登录</button>\n" +
@@ -175,6 +177,12 @@ function Yummy(){
     var Yummy =document.getElementById("info");
     Yummy.innerHTML =
         "      <form action=\"\" class=\"am-form\" data-am-validator>\n" +
+        "        <div>&nbsp&nbsp\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"Member\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"Restaurant\" onclick=\"Restaurant()\">&nbsp&nbsp餐厅\n" +
+        "          <input type=\"radio\" name=\"role\" value=\"YUMMY\" checked=\"checked\" onclick=\"Yummy()\">&nbsp&nbspYUMMY!经理\n" +
+        "        </div>\n" +
+        "        <br>\n"+
         "        <div class=\"am-form-group\">\n" +
         "          <!--\n" +
         "             <label for=\"doc-vld-name-2\"><i class=\"am-icon-user\"></i></label>\n" +
@@ -188,11 +196,6 @@ function Yummy(){
         "                     </label>\n" +
         "                     -->\n" +
         "          <input type=\"password\" id=\"yummypassword\" placeholder=\"输入密码\" required/>\n" +
-        "        </div>\n" +
-        "        <div>&nbsp&nbsp\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"Member\" onclick=\"Member()\">&nbsp&nbsp会员\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"Restaurant\" onclick=\"Restaurant()\">&nbsp&nbsp餐厅\n" +
-        "          <input type=\"radio\" name=\"role\" value=\"YUMMY\" checked=\"checked\" onclick=\"Yummy()\">&nbsp&nbspYUMMY!经理\n" +
         "        </div>\n" +
         "      </form>\n" +
         "      <div class=\"am-form\">\n" +

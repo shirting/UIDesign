@@ -47,7 +47,7 @@ public class DaoHelperImpl implements DaoHelper {
 
 		try {
 			connection = datasource.getConnection();
-			//System.out.println(",,,,,,,"+connection);
+			System.out.println(",,,,,,,"+connection);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
