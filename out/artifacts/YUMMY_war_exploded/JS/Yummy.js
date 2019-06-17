@@ -1,5 +1,20 @@
 function CheckRestaurant(){
-    var name,type,address,phone;
+    var div1 = document.getElementById("approve");
+    div1.style.color = "#4682B4";
+    var div1 = document.getElementById("approval");
+    div1.style.color = "#DCDCDC";
+    var div1 = document.getElementById("resStatistic");
+    div1.style.color = "#DCDCDC";
+    var div1 = document.getElementById("memStatistic");
+    div1.style.color = "#DCDCDC";
+    var div1 = document.getElementById("logout");
+    div1.style.color = "#DCDCDC";
+
+    var title = document.getElementById("title");
+    title.innerHTML = "注册餐厅审批";
+    var title2 = document.getElementById("title2");
+    title2.innerHTML = "Restaurants";
+    var id,name,type,address,phone;
     //alert("ccccc");
     //得到所有需要审核的餐厅
     $.ajax({
@@ -8,40 +23,53 @@ function CheckRestaurant(){
         url:"GetCheckingRestaurantServlet",
         data:"",
         success:function(result){
-            //console.log(result);
+            console.log(result);
             var showplace=document.getElementById("showplace");
             showplace.innerHTML="";
             var tt=document.getElementById("tt");
             tt.innerHTML="";
-            tt.innerHTML +="<div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">序号</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">餐厅名</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">联系方式</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">餐厅类型</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">餐厅地址</td>\n" +
-                "                                </div>";
+            tt.innerHTML += " <table class=\"am-table am-table-striped am-table-hover\">\n" +
+                "                                    <thead>\n" +
+                "                                    <tr style=\"font-weight:bold\">\n" +
+                "                                        <th>餐厅编号</th>\n" +
+                "                                        <th>餐厅名称</th>\n" +
+                "                                        <th>餐厅类型</th>\n" +
+                "                                        <th>联系方式</th>\n" +
+                "                                        <th>餐厅地址</th>\n" +
+                "                                        <th>相应操作</th>\n" +
+                "                                    </tr>\n" +
+                "                                    </thead>\n" +
+                "                                    <tbody id=\"tbd\">\n" +
+                "                                    </tbody>\n" +
+                "                                </table>";
+            var tbody = document.getElementById("tbd");
+
+            tbody.innerHTML = "";
             if(result.length>0) {
-                for (var i = 0; i < result.length; i++) {
+                showplace.innerHTML = "";
+                for(var i=0;i<result.length;i++){
+                    id=result[i].chaptcha;
+                    name=result[i].resName;
+                    phone=result[i].phone;
+                    address=result[i].resAddress;
+                    type=result[i].restype;
+                    tbody.innerHTML +="<td class=\"am-text-middle\">"+id+"</td>\n" +
+                        "            <td class=\"am-text-middle\">"+name+"</td>\n" +
+                        "            <td class=\"am-text-middle\">"+type+"</td>\n" +
+                        "            <td class=\"am-text-middle\">"+phone+"</td>\n" +
+                        "            <td class=\"am-text-middle\" >"+address+"</td>\n" +
+                        "            <td>\n" +
+                        "                <button class=\"am-btn am-btn-success am-btn-xs\" onclick=ResSuccess('"+name+"','"+phone+"','"+type+"','"+address+"')>\n" +
+                        "                <i class=\"am-icon-check\"></i>\n" +
+                        "                通过\n" +
+                        "                </button>\n" +
+                        "                <button class=\"am-btn am-btn-danger am-btn-xs\" onclick=ResFail(('"+name+"','"+phone+"','"+type+"','"+address+"')>\n" +
+                        "                 <i class=\"am-icon-close\"></i>\n" +
+                        "                 拒绝\n" +
+                        "                </button>\n" +
+                        "            </td>\n";
+                }
+                /*for (var i = 0; i < result.length; i++) {
                     name=result[i].resName;
                     phone=result[i].phone;
                     address=result[i].resAddress;
@@ -77,9 +105,9 @@ function CheckRestaurant(){
                     showplace.innerHTML +="&nbsp&nbsp&nbsp&nbsp<button class=\"am-btn am-btn-danger\" onclick=ResSuccess('"+name+"','"+phone+"','"+type+"','"+address+"')>通过</button>\n"+
                         "        <button class=\"am-btn am-btn-danger\" onclick=ResFail(('"+name+"','"+phone+"','"+type+"','"+address+"')>拒绝</button>\n";
                     showplace.innerHTML +="<br><br><br><br>"
-                }
+                }*/
             }else{
-                showplace.innerHTML += " <div>暂无需要审核的信息</div>";
+                showplace.innerHTML += " <strong style='color: rosybrown'>暂无需要审核的信息</strong>";
             }
         }
     });
@@ -123,7 +151,22 @@ function ResSuccess(name,phone,type,address){
 }
 
 function CheckInfo(){
-    var name,type,address,phone;
+    var div1 = document.getElementById("approve");
+    div1.style.color = "#DCDCDC";
+    var div1 = document.getElementById("approval");
+    div1.style.color = "#4682B4";
+    var div1 = document.getElementById("resStatistic");
+    div1.style.color = "#DCDCDC";
+    var div1 = document.getElementById("memStatistic");
+    div1.style.color = "#DCDCDC";
+    var div1 = document.getElementById("logout");
+    div1.style.color = "#DCDCDC";
+
+    var title = document.getElementById("title");
+    title.innerHTML = "餐厅信息审批";
+    var title2 = document.getElementById("title2");
+    title2.innerHTML = "Restaurant Info";
+    var id,name,type,address,phone;
 //得到审核的餐厅信息
     //alert("ddd");
     $.ajax({
@@ -137,40 +180,47 @@ function CheckInfo(){
             showplace.innerHTML="";
             var tt=document.getElementById("tt");
             tt.innerHTML="";
-            tt.innerHTML +="<div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">序号</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">餐厅名</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">联系方式</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">餐厅类型</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">||</td>\n" +
-                "                                </div>\n" +
-                "                                <div class=\"th th-amount\">\n" +
-                "                                    <td class=\"td-inner\">餐厅地址</td>\n" +
-                "                                </div>";
+            tt.innerHTML += " <table class=\"am-table am-table-striped am-table-hover\">\n" +
+                "                                    <thead>\n" +
+                "                                    <tr style=\"font-weight:bold\">\n" +
+                "                                        <th>餐厅编号</th>\n" +
+                "                                        <th>餐厅名称</th>\n" +
+                "                                        <th>餐厅类型</th>\n" +
+                "                                        <th>联系方式</th>\n" +
+                "                                        <th>餐厅地址</th>\n" +
+                "                                        <th>相应操作</th>\n" +
+                "                                    </tr>\n" +
+                "                                    </thead>\n" +
+                "                                    <tbody id=\"tbd\">\n" +
+                "                                    </tbody>\n" +
+                "                                </table>";
+            var tbody = document.getElementById("tbd");
+            tbody.innerHTML = "";
+
             if(result.length>0){
+            showplace.innerHTML = "";
             for(var i=0;i<result.length;i++){
+                id=result[i].chaptcha;
                 name=result[i].resName;
                 phone=result[i].phone;
                 address=result[i].resAddress;
                 type=result[i].restype;
-                showplace.innerHTML +="<div class=\"th th-amount\">\n" +
+                tbody.innerHTML +="<td class=\"am-text-middle\">"+id+"</td>\n" +
+                    "            <td class=\"am-text-middle\">"+name+"</td>\n" +
+                    "            <td class=\"am-text-middle\">"+type+"</td>\n" +
+                    "            <td class=\"am-text-middle\">"+phone+"</td>\n" +
+                    "            <td class=\"am-text-middle\" >"+address+"</td>\n" +
+                    "            <td>\n" +
+                    "                <button class=\"am-btn am-btn-success am-btn-xs\" onclick=EditSuccess('"+id+"')>\n" +
+                    "                <i class=\"am-icon-check\"></i>\n" +
+                    "                通过\n" +
+                    "                </button>\n" +
+                    "                <button class=\"am-btn am-btn-danger am-btn-xs\" onclick=EditFail('"+id+"')>\n" +
+                    "                 <i class=\"am-icon-close\"></i>\n" +
+                    "                 拒绝\n" +
+                    "                </button>\n" +
+                    "            </td>\n";
+                /*showplace.innerHTML +="<div class=\"th th-amount\">\n" +
                     "                                    <td class=\"td-inner\">"+(i+1)+"</td>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"th th-amount\">\n" +
@@ -200,10 +250,10 @@ function CheckInfo(){
                 showplace.innerHTML +="<br><br><br>";
                 showplace.innerHTML +="&nbsp&nbsp&nbsp&nbsp<button class=\"am-btn am-btn-danger\" onclick=EditSuccess('"+result[i].chaptcha+"')>通过</button>\n"+
                     "        <button class=\"am-btn am-btn-danger\" onclick=EditFail('"+result[i].chaptcha+"')>拒绝</button>\n";
-                showplace.innerHTML +="<br><br><br><br>"
+                showplace.innerHTML +="<br><br><br><br>"*/
             }
         }else{
-            showplace.innerHTML += " <div>暂无需要审核的信息</div>";
+            showplace.innerHTML += " <strong style='color: rosybrown'>暂无需要审核的信息</strong>";
 }
         }
     })

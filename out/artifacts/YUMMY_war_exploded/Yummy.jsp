@@ -39,6 +39,7 @@
                     <div class="am-tabs-bd">
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                             <div class="order-top" id="tt">
+
                             </div>
                             <div class="order-main">
                                 <div class="order-list" id="showplace">
@@ -56,19 +57,19 @@
     <aside class="menu">
         <ul>
             <li class="person">
-                <a onclick="CheckRestaurant()">审批餐厅注册</a>
+                <a onclick="CheckRestaurant()" id="approve" style="color: gray;font-weight: bold">审批餐厅注册</a>
             </li>
             <li class="person">
-                <a onclick="CheckInfo()">审批餐厅信息修改</a>
+                <a onclick="CheckInfo()" id="approval" style="color: gray;font-weight: bold">审批餐厅信息修改</a>
             </li>
             <li class="person">
-                <a onclick="GetRestaurantInfo()">餐厅信息统计</a>
+                <a onclick="GetRestaurantInfo()" id="resStatistic" style="color: gray;font-weight: bold">餐厅信息统计</a>
             </li>
             <li class="person">
-                <a onclick="GetMemberInfo()">会员信息统计</a>
+                <a onclick="GetMemberInfo()" id="memStatistic" style="color: gray;font-weight: bold">会员信息统计</a>
             </li>
             <li class="person">
-                <a onclick="RestaurantLogout()">退出</a>
+                <a onclick="RestaurantLogout()" id="logout" style="color: gray;font-weight: bold">退出</a>
             </li>
         </ul>
 
